@@ -2,7 +2,7 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MOVON Sales Team</title>
     
     <!-- Tailwind CSS -->
@@ -18,6 +18,7 @@
     <style>
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
         }
     </style>
 </head>
@@ -132,71 +133,70 @@
           const simData = getSimulationData();
 
           const SectionTitle = ({ title, subtitle, isDark = false }) => (
-            <div className="text-center max-w-4xl mx-auto mb-16">
+            <div className="text-center w-full max-w-4xl mx-auto mb-12 md:mb-16 px-4">
               <h2 className={`text-3xl md:text-5xl font-black mb-4 tracking-tight uppercase ${isDark ? 'text-white' : 'text-[#102653]'}`}>
                 {title}
               </h2>
-              <p className={`text-xl md:text-2xl font-medium ${isDark ? 'text-[#FFC928]' : 'text-[#0755C9]'}`}>
+              <p className={`text-lg md:text-2xl font-medium ${isDark ? 'text-[#FFC928]' : 'text-[#0755C9]'}`}>
                 {subtitle}
               </p>
-              <div className={`h-1.5 w-24 rounded-full mt-8 mx-auto ${isDark ? 'bg-white/20' : 'bg-[#FFC928]'}`}></div>
+              <div className={`h-1.5 w-16 md:w-24 rounded-full mt-6 md:mt-8 mx-auto ${isDark ? 'bg-white/20' : 'bg-[#FFC928]'}`}></div>
             </div>
           );
 
           return (
-            <div className="min-h-screen bg-slate-50 font-sans text-slate-800 scroll-smooth selection:bg-[#FFC928] selection:text-[#102653]">
+            <div className="min-h-screen bg-slate-50 font-sans text-slate-800 scroll-smooth selection:bg-[#FFC928] selection:text-[#102653] w-full overflow-hidden">
               
               {/* STICKY NAVBAR */}
-              <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-                <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-center md:justify-between">
+              <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm w-full">
+                <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#102653] text-[#FFC928] rounded-xl flex items-center justify-center font-black text-xl shadow-inner">
+                    <div className="w-8 h-8 md:w-10 md:h-10 bg-[#102653] text-[#FFC928] rounded-lg md:rounded-xl flex items-center justify-center font-black text-lg md:text-xl shadow-inner">
                       M
                     </div>
-                    <span className="font-extrabold text-[#102653] tracking-widest text-xl">MST</span>
+                    <span className="font-extrabold text-[#102653] tracking-widest text-lg md:text-xl">MST</span>
                   </div>
-                  <div className="hidden md:flex gap-6 text-sm font-bold text-slate-500 uppercase tracking-wider">
+                  <div className="hidden lg:flex gap-6 text-sm font-bold text-slate-500 uppercase tracking-wider">
                     <a href="#pengenalan" className="hover:text-[#0755C9] transition-colors">Intro</a>
                     <a href="#produk" className="hover:text-[#0755C9] transition-colors">Pillar & Produk</a>
                     <a href="#keyin" className="hover:text-[#0755C9] transition-colors">Sales Flow</a>
                     <a href="#kickstart" className="hover:text-[#0755C9] transition-colors">Kickstart</a>
-                    <a href="#komisyen" className="hover:text-[#0755C9] transition-colors">Komisyen & Task</a>
+                    <a href="#komisyen" className="hover:text-[#0755C9] transition-colors">Komisyen</a>
                   </div>
                 </div>
               </nav>
 
               {/* 1. HERO SECTION */}
-              <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-12 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900 via-slate-950 to-black overflow-hidden">
-                <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#0755C9] rounded-full blur-[120px] opacity-40 mix-blend-screen animate-[pulse_8s_ease-in-out_infinite]"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-600 rounded-full blur-[150px] opacity-20 mix-blend-screen animate-[pulse_10s_ease-in-out_infinite_reverse]"></div>
-                <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[800px] h-[300px] bg-[#FFC928] rounded-[100%] blur-[120px] opacity-10 mix-blend-overlay"></div>
+              <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-4 md:px-6 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900 via-slate-950 to-black overflow-hidden">
+                <div className="absolute top-[-10%] left-[-10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#0755C9] rounded-full blur-[80px] md:blur-[120px] opacity-40 mix-blend-screen animate-[pulse_8s_ease-in-out_infinite]"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-cyan-600 rounded-full blur-[100px] md:blur-[150px] opacity-20 mix-blend-screen animate-[pulse_10s_ease-in-out_infinite_reverse]"></div>
                 
-                <div className="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center text-center mt-8">
+                <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center w-full">
                   
-                  <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 text-cyan-300 font-bold tracking-[0.2em] mb-8 uppercase text-xs md:text-sm shadow-[0_0_40px_rgba(7,85,201,0.5)]">
-                    <span className="relative flex h-2.5 w-2.5">
+                  <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-1.5 md:py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 text-cyan-300 font-bold tracking-[0.1em] md:tracking-[0.2em] mb-6 md:mb-8 uppercase text-[10px] md:text-sm shadow-[0_0_40px_rgba(7,85,201,0.5)]">
+                    <span className="relative flex h-2 w-2 md:h-2.5 md:w-2.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 md:h-2.5 md:w-2.5 bg-cyan-500"></span>
                     </span>
                     Official Team Portal
                   </div>
                   
-                  <h1 className="text-7xl md:text-8xl lg:text-[9rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-blue-100 to-blue-400 tracking-tighter drop-shadow-[0_0_40px_rgba(255,255,255,0.2)] mb-0 leading-none">
+                  <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-blue-100 to-blue-400 tracking-tighter drop-shadow-[0_0_40px_rgba(255,255,255,0.2)] mb-0 leading-none">
                     MST
                   </h1>
-                  <h2 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-[#FFC928] tracking-[0.2em] md:tracking-[0.4em] uppercase mb-8 drop-shadow-lg">
+                  <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-[#FFC928] tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.4em] uppercase mb-6 md:mb-8 drop-shadow-lg text-center">
                     Movon Sales Team
                   </h2>
                   
-                  <div className="text-3xl md:text-6xl font-black text-white mb-10 tracking-tight">
+                  <div className="text-2xl sm:text-3xl md:text-6xl font-black text-white mb-8 md:mb-10 tracking-tight">
                     DRIVE YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 italic drop-shadow-[0_0_20px_rgba(34,211,238,0.4)]">DREAM</span>
                   </div>
                   
-                  <p className="text-lg md:text-2xl text-blue-100/80 font-light mb-16 max-w-3xl leading-relaxed backdrop-blur-sm">
+                  <p className="text-base sm:text-lg md:text-2xl text-blue-100/80 font-light mb-12 md:mb-16 max-w-3xl leading-relaxed backdrop-blur-sm px-4">
                     Platform kerjaya premium untuk anda bina <strong className="text-white font-bold">pendapatan luar biasa tanpa had</strong>. Segala kelengkapan, sistem canggih, dan latihan profesional disediakan sepenuhnya.
                   </p>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20 w-full max-w-5xl relative">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-16 md:mb-20 w-full max-w-5xl relative px-2">
                     <div className="absolute inset-0 bg-blue-500/5 blur-3xl rounded-[3rem] -z-10"></div>
                     {[
                       { icon: "⚡", text: "Tanpa Modal" },
@@ -204,48 +204,48 @@
                       { icon: "📚", text: "Latihan Percuma" },
                       { icon: "🛡️", text: "Sistem Lengkap" }
                     ].map((feat, idx) => (
-                      <div key={idx} className="relative overflow-hidden flex flex-col items-center justify-center p-8 rounded-[2rem] bg-white/5 backdrop-blur-2xl border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(34,211,238,0.2)] transition-all duration-500 group">
-                        <span className="text-4xl mb-5 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">{feat.icon}</span>
-                        <span className="text-white font-bold text-sm md:text-base uppercase tracking-widest text-center">{feat.text}</span>
+                      <div key={idx} className="relative overflow-hidden flex flex-col items-center justify-center p-4 md:p-8 rounded-2xl md:rounded-[2rem] bg-white/5 backdrop-blur-2xl border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 hover:-translate-y-1 md:hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.2)] transition-all duration-500 group">
+                        <span className="text-3xl md:text-4xl mb-3 md:mb-5 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">{feat.icon}</span>
+                        <span className="text-white font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider md:tracking-widest text-center">{feat.text}</span>
                       </div>
                     ))}
                   </div>
                   
-                  <a href="#pengenalan" className="group flex flex-col items-center gap-4 opacity-70 hover:opacity-100 transition-all duration-300">
-                    <span className="text-xs font-bold text-cyan-300 uppercase tracking-[0.3em]">Teroka Sekarang</span>
-                    <div className="p-4 rounded-full bg-white/5 text-white border border-white/20 group-hover:bg-cyan-500/20 group-hover:border-cyan-400/50 transition-all animate-bounce shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center justify-center">
-                      <span className="text-xl leading-none">⬇️</span>
+                  <a href="#pengenalan" className="group flex flex-col items-center gap-3 md:gap-4 opacity-70 hover:opacity-100 transition-all duration-300">
+                    <span className="text-[10px] md:text-xs font-bold text-cyan-300 uppercase tracking-[0.2em] md:tracking-[0.3em]">Teroka Sekarang</span>
+                    <div className="p-3 md:p-4 rounded-full bg-white/5 text-white border border-white/20 group-hover:bg-cyan-500/20 group-hover:border-cyan-400/50 transition-all animate-bounce shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                      <span className="text-lg md:text-xl leading-none">⬇️</span>
                     </div>
                   </a>
                 </div>
               </section>
 
               {/* 2. INTRO MST */}
-              <section id="pengenalan" className="py-24 px-6 bg-white">
-                <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+              <section id="pengenalan" className="py-16 md:py-24 px-4 md:px-6 bg-white w-full">
+                <div className="max-w-5xl mx-auto flex flex-col items-center text-center w-full">
                   <SectionTitle title="Intro MST" subtitle="Satu Pasukan, Satu Matlamat, Jaya Bersama" />
-                  <div className="w-full max-w-4xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white bg-slate-50 flex items-center justify-center">
+                  <div className="w-full max-w-4xl mx-auto rounded-xl md:rounded-[2rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
                     <img src="https://lh3.googleusercontent.com/d/1D8cEbjFDcqjEHPGVkUaN829W8y6SOqoy" alt="Intro MST" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" loading="lazy" />
                   </div>
                 </div>
               </section>
 
               {/* 3. MOVON x CUCKOO */}
-              <section className="py-24 px-6 bg-[#EFF7FF]">
-                <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+              <section className="py-16 md:py-24 px-4 md:px-6 bg-[#EFF7FF] w-full">
+                <div className="max-w-5xl mx-auto flex flex-col items-center text-center w-full">
                   <SectionTitle title="MOVON × CUCKOO" subtitle="Perkongsian Hebat, Peluang Lebih Besar" />
-                  <div className="w-full max-w-4xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white bg-slate-50 flex items-center justify-center">
+                  <div className="w-full max-w-4xl mx-auto rounded-xl md:rounded-[2rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
                     <img src="https://lh3.googleusercontent.com/d/1HMsZp7ciliJgFzvcAVS9C0VQ4KNzHGoO" alt="MOVON x CUCKOO" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" loading="lazy" />
                   </div>
                 </div>
               </section>
 
               {/* 4. PILLAR & PRODUK */}
-              <section id="produk" className="py-24 px-6 bg-white">
-                <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
+              <section id="produk" className="py-16 md:py-24 px-4 md:px-6 bg-white w-full">
+                <div className="max-w-7xl mx-auto flex flex-col items-center text-center w-full">
                   <SectionTitle title="Pillar MOVON" subtitle="Satu Platform, Pelbagai Keperluan" />
                   
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full mb-24 max-w-7xl mx-auto">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full mb-16 md:mb-24 max-w-7xl mx-auto">
                     {[
                       { 
                         title: "MOVON SPACE", 
@@ -288,16 +288,16 @@
                         ] 
                       }
                     ].map((pillar, idx) => (
-                      <div key={idx} className={`rounded-3xl border-2 flex flex-col overflow-hidden w-full ${pillar.bg} ${pillar.border} shadow-sm transition-transform hover:-translate-y-1`}>
+                      <div key={idx} className={`rounded-2xl md:rounded-3xl border-2 flex flex-col overflow-hidden w-full ${pillar.bg} ${pillar.border} shadow-sm transition-transform hover:-translate-y-1`}>
                         <div className="w-full bg-white relative overflow-hidden border-b-2 border-inherit flex items-center justify-center">
                           <img src={pillar.image} alt={pillar.title} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
                         </div>
-                        <div className="w-full p-8 flex flex-col flex-grow text-left">
-                          <h3 className={`text-2xl font-black ${pillar.color} mb-6 leading-tight uppercase`}>{pillar.title}</h3>
-                          <ul className={`w-full space-y-4 border-t border-black/10 pt-6 flex flex-col`}>
+                        <div className="w-full p-6 md:p-8 flex flex-col flex-grow text-left">
+                          <h3 className={`text-xl md:text-2xl font-black ${pillar.color} mb-4 md:mb-6 leading-tight uppercase`}>{pillar.title}</h3>
+                          <ul className={`w-full space-y-3 md:space-y-4 border-t border-black/10 pt-4 md:pt-6 flex flex-col`}>
                             {pillar.products.map((prod, pIdx) => (
-                              <li key={pIdx} className="flex items-start gap-3 text-sm font-bold text-slate-700 leading-snug">
-                                <div className={`w-2.5 h-2.5 rounded-full mt-1 shrink-0 ${pillar.color.replace('text', 'bg')}`}></div>
+                              <li key={pIdx} className="flex items-start gap-2 md:gap-3 text-xs md:text-sm font-bold text-slate-700 leading-snug">
+                                <div className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full mt-1 shrink-0 ${pillar.color.replace('text', 'bg')}`}></div>
                                 <span>{prod}</span>
                               </li>
                             ))}
@@ -310,39 +310,39 @@
                   <SectionTitle title="Produk Yang Boleh Dijual" subtitle="Pilihan luas untuk pasaran seluruh Malaysia" />
 
                   {/* GAMBAR PRODUK SECTION */}
-                  <div className="w-full max-w-5xl flex flex-col gap-16 mx-auto">
+                  <div className="w-full max-w-5xl flex flex-col gap-12 md:gap-16 mx-auto">
                     <div className="flex flex-col items-start w-full">
-                      <h3 className="text-3xl font-black text-[#102653] mb-6 border-l-8 border-[#0755C9] pl-4 uppercase tracking-widest">MOVON</h3>
-                      <div className="w-full rounded-[2rem] overflow-hidden shadow-xl border-8 border-white bg-slate-50 flex items-center justify-center">
+                      <h3 className="text-2xl md:text-3xl font-black text-[#102653] mb-4 md:mb-6 border-l-4 md:border-l-8 border-[#0755C9] pl-3 md:pl-4 uppercase tracking-widest">MOVON</h3>
+                      <div className="w-full rounded-xl md:rounded-[2rem] overflow-hidden shadow-xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
                         <img src="https://lh3.googleusercontent.com/d/1-zDNh2RQqeYXEgo6NNyaO94CJ11RVsJX" alt="Senarai Produk MOVON" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
                       </div>
                     </div>
 
                     <div className="flex flex-col items-start w-full">
-                      <h3 className="text-3xl font-black text-[#F53045] mb-6 border-l-8 border-[#F53045] pl-4 uppercase tracking-widest">CUCKOO</h3>
-                      <div className="w-full rounded-[2rem] overflow-hidden shadow-xl border-8 border-white bg-slate-50 flex items-center justify-center">
+                      <h3 className="text-2xl md:text-3xl font-black text-[#F53045] mb-4 md:mb-6 border-l-4 md:border-l-8 border-[#F53045] pl-3 md:pl-4 uppercase tracking-widest">CUCKOO</h3>
+                      <div className="w-full rounded-xl md:rounded-[2rem] overflow-hidden shadow-xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
                         <img src="https://lh3.googleusercontent.com/d/1z77jdRGQQ5J2OTO5nkZbgalIkbc3IFE0" alt="Senarai Produk CUCKOO" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
                       </div>
                     </div>
 
                     <div className="flex flex-col items-start w-full">
-                      <h3 className="text-3xl font-black text-slate-800 mb-6 border-l-8 border-slate-800 pl-4 uppercase tracking-widest">CUCKOO × SAMSUNG</h3>
-                      <div className="w-full rounded-[2rem] overflow-hidden shadow-xl border-8 border-white bg-slate-50 flex items-center justify-center">
+                      <h3 className="text-2xl md:text-3xl font-black text-slate-800 mb-4 md:mb-6 border-l-4 md:border-l-8 border-slate-800 pl-3 md:pl-4 uppercase tracking-widest">CUCKOO × SAMSUNG</h3>
+                      <div className="w-full rounded-xl md:rounded-[2rem] overflow-hidden shadow-xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
                         <img src="https://lh3.googleusercontent.com/d/13_fOAQj77Ip5sTIzt5ut73eHzlgLErCx" alt="Senarai Produk CUCKOO x SAMSUNG" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
                       </div>
                     </div>
                   </div>
 
                   {/* PROMOSI PRODUK (2 SECTION) */}
-                  <div className="w-full mt-32 max-w-6xl mx-auto">
+                  <div className="w-full mt-24 md:mt-32 max-w-6xl mx-auto">
                     <SectionTitle title="Promosi Produk" subtitle="Promosi Terkini Untuk Pelanggan Anda" />
-                    <div className="grid md:grid-cols-2 gap-8 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full">
                       {/* Promosi MOVON */}
-                      <div className="w-full rounded-[2rem] overflow-hidden shadow-xl border-8 border-white bg-slate-50 flex items-center justify-center">
+                      <div className="w-full rounded-xl md:rounded-[2rem] overflow-hidden shadow-xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
                         <img src="https://lh3.googleusercontent.com/d/1oZXzM5InboaXoK8Y6iSOlTtkD9VFMxr0" alt="Promosi MOVON" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
                       </div>
                       {/* Promosi CUCKOO */}
-                      <div className="w-full rounded-[2rem] overflow-hidden shadow-xl border-8 border-white bg-slate-50 flex items-center justify-center">
+                      <div className="w-full rounded-xl md:rounded-[2rem] overflow-hidden shadow-xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
                         <img src="https://lh3.googleusercontent.com/d/1VFzcv8HJXHIo5jHa4ESHTqz8MfX5RUxJ" alt="Promosi CUCKOO" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
                       </div>
                     </div>
@@ -352,61 +352,61 @@
               </section>
 
               {/* 5. CARA KEY IN & FLOW PROCESS */}
-              <section id="keyin" className="py-24 px-6 bg-slate-50">
-                <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
+              <section id="keyin" className="py-16 md:py-24 px-4 md:px-6 bg-slate-50 w-full">
+                <div className="max-w-7xl mx-auto flex flex-col items-center text-center w-full">
                   
                   <SectionTitle title="Proses Order & Sales Flow" subtitle="Langkah dari simulasi closing hingga pemasangan" />
 
                   {/* SIMULASI CLOSING (WHATSAPP) */}
-                  <div className="mb-10 text-center w-full">
-                    <h3 className="text-2xl font-black text-[#102653] mb-3 uppercase tracking-wide">Simulasi Sebelum Key-In / Close Sale</h3>
-                    <p className="text-slate-600 font-medium">Contoh perbualan WhatsApp untuk mendapatkan maklumat dari prospek.</p>
+                  <div className="mb-8 md:mb-10 text-center w-full">
+                    <h3 className="text-xl md:text-2xl font-black text-[#102653] mb-2 md:mb-3 uppercase tracking-wide">Simulasi Sebelum Key-In / Close Sale</h3>
+                    <p className="text-sm md:text-base text-slate-600 font-medium">Contoh perbualan WhatsApp untuk mendapatkan maklumat dari prospek.</p>
                   </div>
 
-                  <div className="w-full max-w-md mx-auto bg-[#EFEAE2] rounded-[2rem] border-4 border-slate-200 shadow-xl relative overflow-hidden h-[750px] flex flex-col text-left mb-24">
-                    <div className="bg-[#00a884] text-white px-4 py-2 flex justify-between items-center text-xs font-medium">
+                  <div className="w-full max-w-md mx-auto bg-[#EFEAE2] rounded-2xl md:rounded-[2rem] border-2 md:border-4 border-slate-200 shadow-xl relative overflow-hidden h-[600px] md:h-[750px] flex flex-col text-left mb-16 md:mb-24">
+                    <div className="bg-[#00a884] text-white px-3 md:px-4 py-1.5 md:py-2 flex justify-between items-center text-[10px] md:text-xs font-medium">
                       <span>12:00</span>
-                      <div className="flex gap-2">
-                        <span className="w-4 h-3 bg-white/80 rounded-sm"></span>
+                      <div className="flex gap-1 md:gap-2">
+                        <span className="w-3 md:w-4 h-2 md:h-3 bg-white/80 rounded-sm"></span>
                       </div>
                     </div>
                     
-                    <div className="bg-[#00a884] text-white p-4 flex items-center gap-3 shadow-md z-10">
-                      <div className="w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-slate-500 overflow-hidden shrink-0">
-                        <span className="text-2xl text-white">👤</span>
+                    <div className="bg-[#00a884] text-white p-3 md:p-4 flex items-center gap-2 md:gap-3 shadow-md z-10">
+                      <div className="w-8 h-8 md:w-10 md:h-10 bg-slate-300 rounded-full flex items-center justify-center text-slate-500 overflow-hidden shrink-0">
+                        <span className="text-xl md:text-2xl text-white">👤</span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="font-bold text-lg leading-tight">Prospek MOVON ChillMate</span>
-                        <span className="text-xs text-green-100">online</span>
+                        <span className="font-bold text-sm md:text-lg leading-tight">Prospek MOVON ChillMate</span>
+                        <span className="text-[10px] md:text-xs text-green-100">online</span>
                       </div>
                     </div>
                     
-                    <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-[url('https://w0.peakpx.com/wallpaper/818/148/HD-wallpaper-whatsapp-background-cool-dark-green-new-theme-whatsapp.jpg')] bg-cover bg-center">
-                      <div className="bg-[#d9fdd3] p-3 rounded-2xl rounded-tr-none max-w-[85%] self-end shadow-sm text-sm text-slate-800 relative">
+                    <div className="flex-1 overflow-y-auto p-3 md:p-4 flex flex-col gap-3 md:gap-4 bg-[url('https://w0.peakpx.com/wallpaper/818/148/HD-wallpaper-whatsapp-background-cool-dark-green-new-theme-whatsapp.jpg')] bg-cover bg-center">
+                      <div className="bg-[#d9fdd3] p-2 md:p-3 rounded-xl md:rounded-2xl rounded-tr-none max-w-[85%] self-end shadow-sm text-xs md:text-sm text-slate-800 relative">
                         Hai encik! Pakej promosi peti sejuk MOVON ChillMate+ (601L) masih ada slot kosong. Kapasiti besar, pemasangan & penghantaran percuma. Berminat saya bantu uruskan tempahan? 🤩
-                        <div className="text-[10px] text-slate-500 text-right mt-1 flex justify-end items-center gap-1">
-                          12:01 PM <span className="text-xs text-blue-500">✔️✔️</span>
+                        <div className="text-[9px] md:text-[10px] text-slate-500 text-right mt-1 flex justify-end items-center gap-1">
+                          12:01 PM <span className="text-[10px] md:text-xs text-blue-500">✔️✔️</span>
                         </div>
                       </div>
 
-                      <div className="bg-white p-3 rounded-2xl rounded-tl-none max-w-[85%] self-start shadow-sm text-sm text-slate-800 relative mt-2">
+                      <div className="bg-white p-2 md:p-3 rounded-xl md:rounded-2xl rounded-tl-none max-w-[85%] self-start shadow-sm text-xs md:text-sm text-slate-800 relative mt-1 md:mt-2">
                         Boleh, saya berminat. Macam mana nak daftar?
-                        <div className="text-[10px] text-slate-400 text-right mt-1">12:05 PM</div>
+                        <div className="text-[9px] md:text-[10px] text-slate-400 text-right mt-1">12:05 PM</div>
                       </div>
 
-                      <div className="bg-[#d9fdd3] p-3 rounded-2xl rounded-tr-none max-w-[85%] self-end shadow-sm text-sm text-slate-800 relative mt-2">
+                      <div className="bg-[#d9fdd3] p-2 md:p-3 rounded-xl md:rounded-2xl rounded-tr-none max-w-[85%] self-end shadow-sm text-xs md:text-sm text-slate-800 relative mt-1 md:mt-2">
                         Alhamdulillah, isikan details di bawah untuk saya proceed order ya 👇<br/><br/>
                         *BORANG TEMPAHAN MOVON*<br/>
                         PRODUK: MOVON ChillMate+ (601L)<br/><br/>
                         📌 *MAKLUMAT PELANGGAN*<br/>
                         Nama Penuh: <br/>No. IC: <br/>No. HP: <br/>E-Mel: <br/>Alamat Pemasangan: <br/>Pemilikan (Pemilik/Penyewa): <br/>Jenis Rumah: <br/><br/>
                         📌 *MAKLUMAT KECEMASAN*<br/>Nama:<br/>No. HP:<br/>Hubungan:
-                        <div className="text-[10px] text-slate-500 text-right mt-1 flex justify-end items-center gap-1">
-                          12:06 PM <span className="text-xs text-blue-500">✔️✔️</span>
+                        <div className="text-[9px] md:text-[10px] text-slate-500 text-right mt-1 flex justify-end items-center gap-1">
+                          12:06 PM <span className="text-[10px] md:text-xs text-blue-500">✔️✔️</span>
                         </div>
                       </div>
 
-                      <div className="bg-white p-3 rounded-2xl rounded-tl-none max-w-[90%] self-start shadow-sm text-sm text-slate-800 relative mt-2">
+                      <div className="bg-white p-2 md:p-3 rounded-xl md:rounded-2xl rounded-tl-none max-w-[90%] self-start shadow-sm text-xs md:text-sm text-slate-800 relative mt-1 md:mt-2">
                         *BORANG TEMPAHAN MOVON*<br/>
                         PRODUK: MOVON ChillMate+ (601L)<br/><br/>
                         📌 *MAKLUMAT PELANGGAN*<br/>
@@ -421,14 +421,14 @@
                         Nama: Siti Binti Ali<br/>
                         No. HP: 019-8765432<br/>
                         Hubungan: Isteri
-                        <div className="text-[10px] text-slate-400 text-right mt-1">12:15 PM</div>
+                        <div className="text-[9px] md:text-[10px] text-slate-400 text-right mt-1">12:15 PM</div>
                       </div>
                     </div>
                     
-                    <div className="bg-[#f0f2f5] p-3 flex items-center gap-3">
-                      <div className="bg-white flex-1 rounded-full h-10 px-4 flex items-center text-slate-400 text-sm">Ketik mesej...</div>
-                      <div className="w-10 h-10 bg-[#00a884] rounded-full flex items-center justify-center text-white shrink-0 shadow-md">
-                        <span className="text-xl">📱</span>
+                    <div className="bg-[#f0f2f5] p-2 md:p-3 flex items-center gap-2 md:gap-3">
+                      <div className="bg-white flex-1 rounded-full h-8 md:h-10 px-3 md:px-4 flex items-center text-slate-400 text-xs md:text-sm">Ketik mesej...</div>
+                      <div className="w-8 h-8 md:w-10 md:h-10 bg-[#00a884] rounded-full flex items-center justify-center text-white shrink-0 shadow-md">
+                        <span className="text-lg md:text-xl">📱</span>
                       </div>
                     </div>
                   </div>
@@ -436,63 +436,64 @@
                   {/* FLOW PROCESS SECTION */}
                   <SectionTitle title="SALES FLOW PENGURUSAN ORDER" subtitle="Aliran proses dari pendaftaran hingga pemasangan" />
                   
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 w-full mt-6 items-start">
+                  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 w-full mt-4 md:mt-6 items-start">
                     {/* MOVON FLOW */}
-                    <div className="bg-white/80 backdrop-blur-xl rounded-[3rem] shadow-[0_20px_50px_-15px_rgba(7,85,201,0.15)] p-8 md:p-12 relative border-2 border-white">
-                      <div className="bg-gradient-to-r from-blue-600 to-[#102653] text-white py-3 px-8 rounded-full inline-flex items-center gap-3 shadow-lg shadow-blue-500/30 mb-12 transform -translate-y-6">
-                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-xl backdrop-blur-sm">M</div>
-                        <span className="font-black tracking-widest text-lg">MOVON FLOW</span>
+                    <div className="bg-white/80 backdrop-blur-xl rounded-2xl md:rounded-[3rem] shadow-[0_10px_30px_-10px_rgba(7,85,201,0.15)] md:shadow-[0_20px_50px_-15px_rgba(7,85,201,0.15)] p-4 sm:p-6 md:p-12 relative border-2 border-white w-full">
+                      <div className="bg-gradient-to-r from-blue-600 to-[#102653] text-white py-2 md:py-3 px-6 md:px-8 rounded-full inline-flex items-center gap-2 md:gap-3 shadow-lg shadow-blue-500/30 mb-8 md:mb-12 transform -translate-y-6 md:-translate-y-8 lg:-translate-y-16">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-sm md:text-xl backdrop-blur-sm">M</div>
+                        <span className="font-black tracking-wider md:tracking-widest text-sm md:text-lg">MOVON FLOW</span>
                       </div>
                       
-                      <div className="relative flex flex-col items-center">
-                        <div className="absolute left-1/2 top-0 bottom-32 w-1 -translate-x-1/2 border-l-4 border-dotted border-blue-200 z-0"></div>
+                      <div className="relative flex flex-col items-center w-full">
+                        <div className="absolute left-1/2 top-0 bottom-24 md:bottom-32 w-0.5 md:w-1 -translate-x-1/2 border-l-2 md:border-l-4 border-dotted border-blue-200 z-0"></div>
                         
-                        <div className="w-full flex flex-col items-center gap-8 mb-12">
+                        <div className="w-full flex flex-col items-center gap-4 md:gap-8 mb-8 md:mb-12">
                           {[
                             { num: "01", icon: "⌨️", title: "Key-In Order", desc: "Isi data prospek dalam portal" },
                             { num: "02", icon: "✍️", title: "Sign & eKYC", desc: "Pelanggan verify IC melalui link" },
                             { num: "03", icon: "💳", title: "Payment", desc: "Bayaran / Update Kad (RM0)" }
                           ].map((step, idx) => (
-                            <div key={idx} className="relative z-10 bg-white border border-blue-50 rounded-full p-3 pr-8 flex items-center gap-5 shadow-[0_10px_20px_-10px_rgba(7,85,201,0.1)] w-full max-w-sm hover:scale-105 transition-all cursor-default group">
-                              <div className="w-16 h-16 shrink-0 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 relative">
-                                <span className="text-3xl">{step.icon}</span>
-                                <div className="absolute -top-1 -left-1 w-7 h-7 bg-[#FFC928] rounded-full text-[#102653] font-black text-sm flex items-center justify-center border-2 border-white">{step.num}</div>
+                            <div key={idx} className="relative z-10 bg-white border border-blue-50 rounded-full p-2 md:p-3 pr-4 md:pr-8 flex items-center gap-3 md:gap-5 shadow-[0_5px_15px_-5px_rgba(7,85,201,0.1)] w-full max-w-[280px] md:max-w-sm hover:scale-105 transition-all cursor-default group">
+                              <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 relative">
+                                <span className="text-xl md:text-3xl">{step.icon}</span>
+                                <div className="absolute -top-1 -left-1 w-5 h-5 md:w-7 md:h-7 bg-[#FFC928] rounded-full text-[#102653] font-black text-[10px] md:text-sm flex items-center justify-center border md:border-2 border-white">{step.num}</div>
                               </div>
                               <div className="text-left flex-1">
-                                <h4 className="font-bold text-slate-800 text-lg leading-tight">{step.title}</h4>
-                                <p className="text-sm text-slate-500 font-medium">{step.desc}</p>
+                                <h4 className="font-bold text-slate-800 text-sm md:text-lg leading-tight">{step.title}</h4>
+                                <p className="text-[10px] md:text-sm text-slate-500 font-medium leading-tight md:leading-normal mt-0.5 md:mt-0">{step.desc}</p>
                               </div>
                             </div>
                           ))}
                         </div>
 
-                        <div className="relative z-10 bg-white border-2 border-dashed border-blue-300 text-blue-600 px-6 py-2 rounded-full text-sm font-black shadow-sm mb-10 flex items-center gap-2">
-                          <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping"></span>
+                        <div className="relative z-10 bg-white border md:border-2 border-dashed border-blue-300 text-blue-600 px-4 md:px-6 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-black shadow-sm mb-6 md:mb-10 flex items-center gap-2 text-center">
+                          <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-500 rounded-full animate-ping shrink-0"></span>
                           RISK ASSESSMENT (HQ)
                         </div>
 
-                        <div className="grid grid-cols-2 gap-6 w-full relative z-10">
-                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-6 border border-green-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-2 bg-green-400"></div>
-                            <div className="bg-green-500 text-white px-5 py-1.5 rounded-full text-sm font-black shadow-sm mb-6">✅ LULUS</div>
-                            <div className="flex flex-col gap-3 w-full">
-                              <div className="bg-white rounded-xl p-3 flex items-center justify-center gap-3 shadow-sm border border-green-50">
-                                <div className="bg-green-100 p-2 rounded-lg text-green-600"><span className="text-xl">📞</span></div>
-                                <span className="text-sm font-bold text-slate-700">Call Log</span>
+                        {/* RESPONSIVE GRID FOR MOVON CARDS */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full relative z-10 max-w-lg mx-auto">
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl md:rounded-3xl p-4 md:p-6 border border-green-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
+                            <div className="absolute top-0 w-full h-1 md:h-2 bg-green-400"></div>
+                            <div className="bg-green-500 text-white px-4 md:px-5 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-black shadow-sm mb-4 md:mb-6">✅ LULUS</div>
+                            <div className="flex flex-col gap-2 md:gap-3 w-full">
+                              <div className="bg-white rounded-lg md:rounded-xl p-2 md:p-3 flex items-center justify-center gap-2 md:gap-3 shadow-sm border border-green-50">
+                                <div className="bg-green-100 p-1.5 md:p-2 rounded-md md:rounded-lg text-green-600"><span className="text-sm md:text-xl">📞</span></div>
+                                <span className="text-xs md:text-sm font-bold text-slate-700">Call Log</span>
                               </div>
-                              <div className="flex justify-center -my-2 text-green-400"><span className="text-xl">⬇️</span></div>
-                              <div className="bg-white rounded-xl p-3 flex items-center justify-center gap-3 shadow-sm border border-green-50">
-                                <div className="bg-green-100 p-2 rounded-lg text-green-600"><span className="text-xl">🚚</span></div>
-                                <span className="text-sm font-bold text-slate-700">Installation</span>
+                              <div className="flex justify-center -my-1.5 md:-my-2 text-green-400"><span className="text-sm md:text-xl">⬇️</span></div>
+                              <div className="bg-white rounded-lg md:rounded-xl p-2 md:p-3 flex items-center justify-center gap-2 md:gap-3 shadow-sm border border-green-50">
+                                <div className="bg-green-100 p-1.5 md:p-2 rounded-md md:rounded-lg text-green-600"><span className="text-sm md:text-xl">🚚</span></div>
+                                <span className="text-xs md:text-sm font-bold text-slate-700">Installation</span>
                               </div>
                             </div>
                           </div>
 
-                          <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-3xl p-6 border border-red-100 flex flex-col items-center justify-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-2 bg-red-400"></div>
-                            <div className="bg-red-500 text-white px-5 py-1.5 rounded-full text-sm font-black shadow-sm mb-6">❌ REJECTED</div>
-                            <div className="bg-white rounded-xl p-5 text-center shadow-sm border border-red-50 w-full">
-                              <p className="text-sm font-bold text-slate-600 leading-relaxed">Boleh reapply atas<br/>nama lain / waris</p>
+                          <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl md:rounded-3xl p-4 md:p-6 border border-red-100 flex flex-col items-center justify-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
+                            <div className="absolute top-0 w-full h-1 md:h-2 bg-red-400"></div>
+                            <div className="bg-red-500 text-white px-4 md:px-5 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-black shadow-sm mb-4 md:mb-6">❌ REJECTED</div>
+                            <div className="bg-white rounded-lg md:rounded-xl p-3 md:p-5 text-center shadow-sm border border-red-50 w-full">
+                              <p className="text-xs md:text-sm font-bold text-slate-600 leading-relaxed">Boleh reapply atas<br/>nama lain / waris</p>
                             </div>
                           </div>
                         </div>
@@ -500,68 +501,69 @@
                     </div>
 
                     {/* CUCKOO FLOW */}
-                    <div className="bg-white/80 backdrop-blur-xl rounded-[3rem] shadow-[0_20px_50px_-15px_rgba(245,48,69,0.15)] p-8 md:p-12 relative border-2 border-white mt-8 md:mt-0">
-                      <div className="bg-gradient-to-r from-red-600 to-rose-900 text-white py-3 px-8 rounded-full inline-flex items-center gap-3 shadow-lg shadow-red-500/30 mb-12 transform -translate-y-6">
-                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-xl backdrop-blur-sm">C</div>
-                        <span className="font-black tracking-widest text-lg">CUCKOO FLOW</span>
+                    <div className="bg-white/80 backdrop-blur-xl rounded-2xl md:rounded-[3rem] shadow-[0_10px_30px_-10px_rgba(245,48,69,0.15)] md:shadow-[0_20px_50px_-15px_rgba(245,48,69,0.15)] p-4 sm:p-6 md:p-12 relative border-2 border-white w-full lg:mt-0 mt-8">
+                      <div className="bg-gradient-to-r from-red-600 to-rose-900 text-white py-2 md:py-3 px-6 md:px-8 rounded-full inline-flex items-center gap-2 md:gap-3 shadow-lg shadow-red-500/30 mb-8 md:mb-12 transform -translate-y-6 md:-translate-y-8 lg:-translate-y-16">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-sm md:text-xl backdrop-blur-sm">C</div>
+                        <span className="font-black tracking-wider md:tracking-widest text-sm md:text-lg">CUCKOO FLOW</span>
                       </div>
                       
-                      <div className="relative flex flex-col items-center">
-                        <div className="absolute left-1/2 top-0 bottom-40 w-1 -translate-x-1/2 border-l-4 border-dotted border-red-200 z-0"></div>
+                      <div className="relative flex flex-col items-center w-full">
+                        <div className="absolute left-1/2 top-0 bottom-32 md:bottom-40 w-0.5 md:w-1 -translate-x-1/2 border-l-2 md:border-l-4 border-dotted border-red-200 z-0"></div>
                         
-                        <div className="w-full flex flex-col items-center gap-8 mb-12">
+                        <div className="w-full flex flex-col items-center gap-4 md:gap-8 mb-8 md:mb-12">
                           {[
                             { num: "01", icon: "⌨️", title: "Key-In Order", desc: "Isi data dlm sistem portal yg sama" },
                             { num: "02", icon: "✍️", title: "Sign Agreement", desc: "Pelanggan sign agreement" },
                             { num: "03", icon: "💳", title: "Payment", desc: "Bayaran advance (jika ada)" }
                           ].map((step, idx) => (
-                            <div key={idx} className="relative z-10 bg-white border border-red-50 rounded-full p-3 pr-8 flex items-center gap-5 shadow-[0_10px_20px_-10px_rgba(245,48,69,0.1)] w-full max-w-sm hover:scale-105 transition-all cursor-default group">
-                              <div className="w-16 h-16 shrink-0 rounded-full bg-red-50 text-red-600 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 relative">
-                                <span className="text-3xl">{step.icon}</span>
-                                <div className="absolute -top-1 -left-1 w-7 h-7 bg-[#FFC928] rounded-full text-[#102653] font-black text-sm flex items-center justify-center border-2 border-white">{step.num}</div>
+                            <div key={idx} className="relative z-10 bg-white border border-red-50 rounded-full p-2 md:p-3 pr-4 md:pr-8 flex items-center gap-3 md:gap-5 shadow-[0_5px_15px_-5px_rgba(245,48,69,0.1)] w-full max-w-[280px] md:max-w-sm hover:scale-105 transition-all cursor-default group">
+                              <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-full bg-red-50 text-red-600 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 relative">
+                                <span className="text-xl md:text-3xl">{step.icon}</span>
+                                <div className="absolute -top-1 -left-1 w-5 h-5 md:w-7 md:h-7 bg-[#FFC928] rounded-full text-[#102653] font-black text-[10px] md:text-sm flex items-center justify-center border md:border-2 border-white">{step.num}</div>
                               </div>
                               <div className="text-left flex-1">
-                                <h4 className="font-bold text-slate-800 text-lg leading-tight">{step.title}</h4>
-                                <p className="text-sm text-slate-500 font-medium">{step.desc}</p>
+                                <h4 className="font-bold text-slate-800 text-sm md:text-lg leading-tight">{step.title}</h4>
+                                <p className="text-[10px] md:text-sm text-slate-500 font-medium leading-tight md:leading-normal mt-0.5 md:mt-0">{step.desc}</p>
                               </div>
                             </div>
                           ))}
                         </div>
 
-                        <div className="relative z-10 bg-white border-2 border-dashed border-red-300 text-red-600 px-6 py-2 rounded-full text-sm font-black shadow-sm mb-10 flex items-center gap-2">
-                          <span className="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                        <div className="relative z-10 bg-white border md:border-2 border-dashed border-red-300 text-red-600 px-4 md:px-6 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-black shadow-sm mb-6 md:mb-10 flex items-center gap-2 text-center">
+                          <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-red-500 rounded-full animate-ping shrink-0"></span>
                           DOCUMENT VERIFY
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 w-full relative z-10">
-                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-4 border border-green-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-2 bg-green-400"></div>
-                            <div className="bg-green-500 text-white px-2 py-1.5 rounded-full text-xs font-black shadow-sm mb-4 w-full text-center">✅ LULUS</div>
-                            <div className="flex flex-col w-full text-xs font-bold text-slate-600 text-center gap-2 mt-auto mb-auto">
-                              <div className="bg-white rounded-xl border border-green-100 py-2 shadow-sm">Risk Assess</div>
-                              <div className="bg-white rounded-xl border border-green-100 py-2 shadow-sm">Call Log</div>
-                              <div className="bg-white rounded-xl border border-green-100 py-2 shadow-sm">Install</div>
+                        {/* RESPONSIVE GRID FOR CUCKOO CARDS (Stack on mobile, row on tablet/desktop) */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full relative z-10 max-w-2xl mx-auto">
+                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl md:rounded-3xl p-3 md:p-4 border border-green-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
+                            <div className="absolute top-0 w-full h-1 md:h-2 bg-green-400"></div>
+                            <div className="bg-green-500 text-white px-2 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-black shadow-sm mb-3 md:mb-4 w-full text-center">✅ LULUS</div>
+                            <div className="flex flex-col w-full text-[10px] md:text-xs font-bold text-slate-600 text-center gap-1.5 md:gap-2 mt-auto mb-auto">
+                              <div className="bg-white rounded-lg md:rounded-xl border border-green-100 py-1.5 md:py-2 shadow-sm">Risk Assess</div>
+                              <div className="bg-white rounded-lg md:rounded-xl border border-green-100 py-1.5 md:py-2 shadow-sm">Call Log</div>
+                              <div className="bg-white rounded-lg md:rounded-xl border border-green-100 py-1.5 md:py-2 shadow-sm">Install</div>
                             </div>
                           </div>
 
-                          <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-4 border border-amber-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-2 bg-amber-400"></div>
-                            <div className="bg-amber-500 text-white px-2 py-1.5 rounded-full text-xs font-black shadow-sm mb-4 w-full text-center">⚠️ RETURN</div>
-                            <div className="flex flex-col w-full text-[10px] sm:text-xs font-bold text-slate-600 text-center gap-1.5">
-                              <div className="bg-white rounded-lg border border-amber-100 py-1.5 shadow-sm">Doc Submit</div>
-                              <div className="bg-white rounded-lg border border-amber-100 py-1.5 shadow-sm">Verify Semula</div>
-                              <div className="bg-white rounded-lg border border-green-100 py-1.5 shadow-sm text-green-600">Lulus</div>
-                              <div className="bg-white rounded-lg border border-green-100 py-1.5 shadow-sm">Risk Assess</div>
-                              <div className="bg-white rounded-lg border border-green-100 py-1.5 shadow-sm">Call Log</div>
-                              <div className="bg-white rounded-lg border border-green-100 py-1.5 shadow-sm">Install</div>
+                          <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl md:rounded-3xl p-3 md:p-4 border border-amber-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
+                            <div className="absolute top-0 w-full h-1 md:h-2 bg-amber-400"></div>
+                            <div className="bg-amber-500 text-white px-2 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-black shadow-sm mb-3 md:mb-4 w-full text-center">⚠️ RETURN</div>
+                            <div className="flex flex-col w-full text-[9px] md:text-[10px] sm:text-xs font-bold text-slate-600 text-center gap-1 md:gap-1.5">
+                              <div className="bg-white rounded-md md:rounded-lg border border-amber-100 py-1 md:py-1.5 shadow-sm">Doc Submit</div>
+                              <div className="bg-white rounded-md md:rounded-lg border border-amber-100 py-1 md:py-1.5 shadow-sm">Verify Semula</div>
+                              <div className="bg-white rounded-md md:rounded-lg border border-green-100 py-1 md:py-1.5 shadow-sm text-green-600">Lulus</div>
+                              <div className="bg-white rounded-md md:rounded-lg border border-green-100 py-1 md:py-1.5 shadow-sm">Risk Assess</div>
+                              <div className="bg-white rounded-md md:rounded-lg border border-green-100 py-1 md:py-1.5 shadow-sm">Call Log</div>
+                              <div className="bg-white rounded-md md:rounded-lg border border-green-100 py-1 md:py-1.5 shadow-sm">Install</div>
                             </div>
                           </div>
 
-                          <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-3xl p-4 border border-red-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-2 bg-red-400"></div>
-                            <div className="bg-red-500 text-white px-2 py-1.5 rounded-full text-xs font-black shadow-sm mb-4 w-full text-center">❌ REJECTED</div>
-                            <div className="bg-white rounded-xl p-3 text-center shadow-sm border border-red-50 w-full mt-auto mb-auto">
-                              <p className="text-xs font-bold text-slate-600 leading-relaxed">Boleh reapply<br/>atas nama<br/>lain / waris</p>
+                          <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl md:rounded-3xl p-3 md:p-4 border border-red-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
+                            <div className="absolute top-0 w-full h-1 md:h-2 bg-red-400"></div>
+                            <div className="bg-red-500 text-white px-2 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-black shadow-sm mb-3 md:mb-4 w-full text-center">❌ REJECTED</div>
+                            <div className="bg-white rounded-lg md:rounded-xl p-2 md:p-3 text-center shadow-sm border border-red-50 w-full mt-auto mb-auto">
+                              <p className="text-[10px] md:text-xs font-bold text-slate-600 leading-relaxed">Boleh reapply<br/>atas nama<br/>lain / waris</p>
                             </div>
                           </div>
                         </div>
@@ -572,19 +574,19 @@
               </section>
 
               {/* 9. MOVON KICKSTART & FOOTER */}
-              <section id="kickstart" className="py-24 px-6 bg-slate-900">
-                <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+              <section id="kickstart" className="py-16 md:py-24 px-4 md:px-6 bg-slate-900 w-full">
+                <div className="max-w-5xl mx-auto flex flex-col items-center text-center w-full">
                   <SectionTitle title="MOVON Kickstart" subtitle="Portal Sumber Rasmi Untuk Ejen" isDark={true} />
                   
-                  <div className="w-full bg-white rounded-[3rem] shadow-xl border border-blue-100 p-10 md:p-16 flex flex-col items-center relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-[80px] -z-10"></div>
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-50 rounded-full blur-[80px] -z-10"></div>
+                  <div className="w-full bg-white rounded-2xl md:rounded-[3rem] shadow-xl border border-blue-100 p-6 md:p-16 flex flex-col items-center relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-40 h-40 md:w-64 md:h-64 bg-blue-50 rounded-full blur-[50px] md:blur-[80px] -z-10"></div>
+                    <div className="absolute bottom-0 left-0 w-40 h-40 md:w-64 md:h-64 bg-cyan-50 rounded-full blur-[50px] md:blur-[80px] -z-10"></div>
 
-                    <p className="text-lg md:text-xl text-slate-600 font-medium max-w-3xl mb-12">
+                    <p className="text-sm sm:text-base md:text-xl text-slate-600 font-medium max-w-3xl mb-8 md:mb-12">
                       Semua bahan pemasaran, skrip, dan panduan yang anda perlukan telah disusun kemas dalam satu portal khas untuk membantu anda bermula dengan pantas!
                     </p>
 
-                    <div className="flex flex-wrap justify-center gap-6 w-full mb-12">
+                    <div className="flex flex-wrap justify-center gap-4 md:gap-6 w-full mb-8 md:mb-12">
                       {[
                         { icon: "📤", title: "Telegram Channel", desc: "Akses terus bahan & info rasmi" },
                         { icon: "🎁", title: "Price & Promotion", desc: "Senarai harga & promosi terkini" },
@@ -592,12 +594,12 @@
                         { icon: "📝", title: "Closing Script", desc: "Skrip terbukti 'close' prospek" },
                         { icon: "📈", title: "Sales & Marketing", desc: "Panduan & strategi pemasaran" }
                       ].map((item, idx) => (
-                        <div key={idx} className="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all w-full sm:w-[45%] md:w-[30%]">
-                          <div className="bg-blue-100 text-[#0755C9] p-4 rounded-full mb-4">
-                            <span className="text-3xl">{item.icon}</span>
+                        <div key={idx} className="flex flex-col items-center text-center p-4 md:p-6 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all w-full sm:w-[45%] md:w-[30%]">
+                          <div className="bg-blue-100 text-[#0755C9] p-3 md:p-4 rounded-full mb-3 md:mb-4">
+                            <span className="text-2xl md:text-3xl">{item.icon}</span>
                           </div>
-                          <h4 className="font-bold text-[#102653] mb-2">{item.title}</h4>
-                          <p className="text-xs text-slate-500 font-medium">{item.desc}</p>
+                          <h4 className="font-bold text-[#102653] mb-1 md:mb-2 text-sm md:text-base">{item.title}</h4>
+                          <p className="text-[10px] md:text-xs text-slate-500 font-medium">{item.desc}</p>
                         </div>
                       ))}
                     </div>
@@ -606,54 +608,54 @@
                       href="https://nak.info/movonkickstart" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#0755C9] text-white font-black text-xl md:text-2xl rounded-full overflow-hidden shadow-[0_10px_40px_-10px_rgba(7,85,201,0.8)] hover:scale-105 transition-transform"
+                      className="group relative inline-flex items-center justify-center gap-2 md:gap-3 px-6 md:px-10 py-3 md:py-5 bg-[#0755C9] text-white font-black text-base sm:text-lg md:text-2xl rounded-full overflow-hidden shadow-[0_10px_30px_-10px_rgba(7,85,201,0.8)] hover:scale-105 transition-transform w-full sm:w-auto"
                     >
                       <span className="relative z-10">AKSES MOVON KICKSTART</span>
-                      <span className="relative z-10 animate-pulse text-2xl">🌐</span>
+                      <span className="relative z-10 animate-pulse text-lg md:text-2xl">🌐</span>
                     </a>
                   </div>
                 </div>
               </section>
 
               {/* 7. KOMISYEN & KALKULATOR */}
-              <section id="komisyen" className="py-24 px-6 bg-[#102653]">
-                <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+              <section id="komisyen" className="py-16 md:py-24 px-4 md:px-6 bg-[#102653] w-full">
+                <div className="max-w-6xl mx-auto flex flex-col items-center text-center w-full">
                   <SectionTitle title="Commission Plan" subtitle="Usaha Anda, Ganjaran Anda" isDark={true} />
                   
-                  <div className="grid md:grid-cols-2 gap-8 w-full mb-12">
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col">
-                      <div className="bg-[#0755C9] p-6 text-white"><h3 className="text-3xl font-black">RENTAL COMMISSION</h3></div>
-                      <div className="p-8 flex flex-col gap-6 text-left">
-                        <div className="flex justify-between items-center border-b border-slate-100 pb-6">
-                          <span className="text-xl font-bold text-slate-600">MOVON Space / Baby / Choice</span>
-                          <span className="text-3xl font-black text-[#0755C9]">RM230</span>
+                  <div className="grid md:grid-cols-2 gap-6 md:gap-8 w-full mb-8 md:mb-12">
+                    <div className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col">
+                      <div className="bg-[#0755C9] p-4 md:p-6 text-white"><h3 className="text-xl md:text-3xl font-black">RENTAL COMMISSION</h3></div>
+                      <div className="p-5 md:p-8 flex flex-col gap-4 md:gap-6 text-left">
+                        <div className="flex justify-between items-center border-b border-slate-100 pb-4 md:pb-6">
+                          <span className="text-sm md:text-xl font-bold text-slate-600">MOVON Space / Baby / Choice</span>
+                          <span className="text-xl md:text-3xl font-black text-[#0755C9]">RM230</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-xl font-bold text-slate-600">MOVON Choice : CUCKOO</span>
-                          <span className="text-3xl font-black text-[#0755C9]">RM100</span>
+                          <span className="text-sm md:text-xl font-bold text-slate-600">MOVON Choice : CUCKOO</span>
+                          <span className="text-xl md:text-3xl font-black text-[#0755C9]">RM100</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col">
-                      <div className="bg-[#04429E] p-6 text-white"><h3 className="text-3xl font-black">OUTRIGHT COMMISSION</h3></div>
-                      <div className="p-8 flex flex-col gap-6 text-left">
-                        <div className="flex justify-between items-center border-b border-slate-100 pb-6">
-                          <span className="text-xl font-bold text-slate-600">MOVON Space & Baby</span>
-                          <span className="text-3xl font-black text-[#0755C9]">RM280</span>
+                    <div className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col">
+                      <div className="bg-[#04429E] p-4 md:p-6 text-white"><h3 className="text-xl md:text-3xl font-black">OUTRIGHT COMMISSION</h3></div>
+                      <div className="p-5 md:p-8 flex flex-col gap-4 md:gap-6 text-left">
+                        <div className="flex justify-between items-center border-b border-slate-100 pb-4 md:pb-6">
+                          <span className="text-sm md:text-xl font-bold text-slate-600">MOVON Space & Baby</span>
+                          <span className="text-xl md:text-3xl font-black text-[#0755C9]">RM280</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-xl font-bold text-slate-600">MOVON Choice : CUCKOO</span>
-                          <span className="text-3xl font-black text-[#0755C9]">RM100</span>
+                          <span className="text-sm md:text-xl font-bold text-slate-600">MOVON Choice : CUCKOO</span>
+                          <span className="text-xl md:text-3xl font-black text-[#0755C9]">RM100</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-8 w-full mb-20">
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:col-span-1">
-                      <div className="bg-[#FFC928] p-6 text-[#102653]"><h3 className="text-3xl font-black">STAR BUILDER INCENTIVE</h3></div>
-                      <div className="p-8 flex flex-col gap-4 text-left">
+                  <div className="grid md:grid-cols-2 gap-6 md:gap-8 w-full mb-16 md:mb-20">
+                    <div className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col md:col-span-1">
+                      <div className="bg-[#FFC928] p-4 md:p-6 text-[#102653]"><h3 className="text-xl md:text-3xl font-black">STAR BUILDER INCENTIVE</h3></div>
+                      <div className="p-5 md:p-8 flex flex-col gap-3 md:gap-4 text-left">
                         {[
                           { unit: "10 Units", bonus: "RM500" },
                           { unit: "20 Units", bonus: "RM1,500" },
@@ -661,59 +663,59 @@
                           { unit: "40 Units", bonus: "RM4,500" },
                           { unit: "50 Units", bonus: "RM6,000" }
                         ].map((tier, idx) => (
-                          <div key={idx} className="flex justify-between items-center border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                            <span className="text-lg md:text-xl font-bold text-slate-600">Target ≥ {tier.unit}</span>
-                            <span className="text-2xl md:text-3xl font-black text-orange-500">{tier.bonus}</span>
+                          <div key={idx} className="flex justify-between items-center border-b border-slate-100 pb-3 md:pb-4 last:border-0 last:pb-0">
+                            <span className="text-base md:text-xl font-bold text-slate-600">Target ≥ {tier.unit}</span>
+                            <span className="text-lg md:text-3xl font-black text-orange-500">{tier.bonus}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-8">
-                      <div className="bg-white rounded-3xl overflow-hidden shadow-2xl">
-                        <div className="bg-slate-800 p-6 text-white"><h3 className="text-2xl font-black">MOVON VACUUM (Outright)</h3></div>
-                        <div className="p-6 flex flex-col gap-3 text-left">
+                    <div className="flex flex-col gap-6 md:gap-8">
+                      <div className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+                        <div className="bg-slate-800 p-4 md:p-6 text-white"><h3 className="text-lg md:text-2xl font-black">MOVON VACUUM (Outright)</h3></div>
+                        <div className="p-5 md:p-6 flex flex-col gap-2 md:gap-3 text-left">
                           <div className="flex justify-between items-center">
-                            <span className="text-lg font-bold text-slate-600">1 - 9 Units</span><span className="text-2xl font-black text-[#0755C9]">RM300</span>
+                            <span className="text-sm md:text-lg font-bold text-slate-600">1 - 9 Units</span><span className="text-lg md:text-2xl font-black text-[#0755C9]">RM300</span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="text-lg font-bold text-slate-600">10 - 19 Units</span><span className="text-2xl font-black text-[#0755C9]">RM320</span>
+                            <span className="text-sm md:text-lg font-bold text-slate-600">10 - 19 Units</span><span className="text-lg md:text-2xl font-black text-[#0755C9]">RM320</span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="text-lg font-bold text-slate-600">20+ Units</span><span className="text-2xl font-black text-[#0755C9]">RM350</span>
+                            <span className="text-sm md:text-lg font-bold text-slate-600">20+ Units</span><span className="text-lg md:text-2xl font-black text-[#0755C9]">RM350</span>
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gradient-to-r from-[#0755C9] to-blue-500 rounded-3xl p-8 text-white shadow-2xl flex items-center justify-between">
-                        <div className="text-left">
-                          <h3 className="text-2xl font-black mb-2">COLLECTION COMMISSION</h3>
-                          <p className="text-blue-100 font-medium text-lg">Max 12 Bulan, Min 5 Jualan</p>
+                      <div className="bg-gradient-to-r from-[#0755C9] to-blue-500 rounded-2xl md:rounded-3xl p-6 md:p-8 text-white shadow-2xl flex flex-col sm:flex-row items-center sm:justify-between gap-4 sm:gap-0">
+                        <div className="text-center sm:text-left">
+                          <h3 className="text-xl md:text-2xl font-black mb-1 md:mb-2">COLLECTION COMMISSION</h3>
+                          <p className="text-blue-100 font-medium text-sm md:text-lg">Max 12 Bulan, Min 5 Jualan</p>
                         </div>
-                        <span className="text-5xl font-black text-[#FFC928]">1.0%</span>
+                        <span className="text-4xl md:text-5xl font-black text-[#FFC928]">1.0%</span>
                       </div>
                     </div>
                   </div>
 
                   {/* SIMULASI HIERARKI & KALKULATOR TERPERINCI */}
-                  <div className="w-full max-w-6xl mx-auto bg-slate-900 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-slate-800">
-                    <div className="bg-slate-950 p-8 md:p-12 text-center border-b border-slate-800">
-                      <h3 className="text-3xl md:text-4xl font-black text-white mb-4 uppercase tracking-wide">Kalkulator Simulasi Pendapatan</h3>
-                      <p className="text-slate-400 text-lg mb-8 max-w-3xl mx-auto">
+                  <div className="w-full max-w-6xl mx-auto bg-slate-900 rounded-2xl md:rounded-[3rem] overflow-hidden shadow-2xl border-2 md:border-4 border-slate-800">
+                    <div className="bg-slate-950 p-6 md:p-12 text-center border-b border-slate-800">
+                      <h3 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 uppercase tracking-wide">Kalkulator Simulasi Pendapatan</h3>
+                      <p className="text-slate-400 text-sm md:text-lg mb-6 md:mb-8 max-w-3xl mx-auto">
                         Pilih kategori jualan untuk melihat perbezaan komisen dan <strong className="text-[#FFC928]">Insentif Momentum Duo</strong>.
                       </p>
                       
                       {/* TABS MODE */}
-                      <div className="flex flex-wrap justify-center gap-4 mb-8">
-                        <button onClick={() => setCalcMode('MOVON')} className={`px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all ${calcMode === 'MOVON' ? 'bg-[#0755C9] text-white shadow-[0_0_20px_rgba(7,85,201,0.5)] scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>
+                      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-8">
+                        <button onClick={() => setCalcMode('MOVON')} className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-[10px] sm:text-xs md:text-base transition-all ${calcMode === 'MOVON' ? 'bg-[#0755C9] text-white shadow-[0_0_20px_rgba(7,85,201,0.5)] scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>
                           MOVON SAHAJA
                         </button>
-                        <button onClick={() => setCalcMode('CUCKOO')} className={`px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all ${calcMode === 'CUCKOO' ? 'bg-[#F53045] text-white shadow-[0_0_20px_rgba(245,48,69,0.5)] scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>
+                        <button onClick={() => setCalcMode('CUCKOO')} className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-[10px] sm:text-xs md:text-base transition-all ${calcMode === 'CUCKOO' ? 'bg-[#F53045] text-white shadow-[0_0_20px_rgba(245,48,69,0.5)] scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>
                           CUCKOO SAHAJA
                         </button>
-                        <button onClick={() => setCalcMode('MIXED')} className={`px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all border border-transparent ${calcMode === 'MIXED' ? 'bg-gradient-to-r from-[#0755C9] to-[#F53045] text-white shadow-[0_0_20px_rgba(255,255,255,0.2)] scale-105 border-white/20' : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:border-slate-600'}`}>
+                        <button onClick={() => setCalcMode('MIXED')} className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-[10px] sm:text-xs md:text-base transition-all border border-transparent ${calcMode === 'MIXED' ? 'bg-gradient-to-r from-[#0755C9] to-[#F53045] text-white shadow-[0_0_20px_rgba(255,255,255,0.2)] scale-105 border-white/20' : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:border-slate-600'}`}>
                           MOVON + CUCKOO
                         </button>
-                        <button onClick={() => setCalcMode('CUSTOM')} className={`px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all ${calcMode === 'CUSTOM' ? 'bg-[#FFC928] text-[#102653] shadow-[0_0_20px_rgba(255,201,40,0.5)] scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>
+                        <button onClick={() => setCalcMode('CUSTOM')} className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-[10px] sm:text-xs md:text-base transition-all ${calcMode === 'CUSTOM' ? 'bg-[#FFC928] text-[#102653] shadow-[0_0_20px_rgba(255,201,40,0.5)] scale-105' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}>
                           KALKULATOR BEBAS
                         </button>
                       </div>
@@ -721,9 +723,9 @@
                       {/* UNIT BUTTONS / SLIDERS */}
                       <div className="min-h-[60px] flex items-center justify-center w-full">
                         {calcMode === 'MOVON' || calcMode === 'CUCKOO' ? (
-                          <div className="flex flex-wrap justify-center gap-3">
+                          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
                             {[5, 10, 15, 20].map((u) => (
-                              <button key={u} onClick={() => setCalcUnits(u)} className={`px-6 py-2 rounded-full font-bold text-sm transition-all ${calcUnits === u ? 'bg-white text-slate-900 scale-110 shadow-lg' : 'bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700'}`}>
+                              <button key={u} onClick={() => setCalcUnits(u)} className={`px-4 md:px-6 py-1.5 md:py-2 rounded-full font-bold text-[10px] md:text-sm transition-all ${calcUnits === u ? 'bg-white text-slate-900 scale-110 shadow-lg' : 'bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700'}`}>
                                 {u} Unit
                               </button>
                             ))}
@@ -731,82 +733,82 @@
                         ) : calcMode === 'MIXED' ? (
                           <div className="flex flex-wrap justify-center gap-2 md:gap-3">
                             {[5, 6, 10, 15, 20].map((u) => (
-                              <button key={u} onClick={() => setCalcUnits(u)} className={`px-4 py-2 rounded-full font-bold text-sm transition-all ${calcUnits === u ? 'bg-gradient-to-r from-[#0755C9] to-[#F53045] text-white scale-110 shadow-lg' : 'bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700'}`}>
+                              <button key={u} onClick={() => setCalcUnits(u)} className={`px-3 md:px-4 py-1.5 md:py-2 rounded-full font-bold text-[10px] md:text-sm transition-all ${calcUnits === u ? 'bg-gradient-to-r from-[#0755C9] to-[#F53045] text-white scale-110 shadow-lg' : 'bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700'}`}>
                                 {u === 6 ? '🌟 6+6 (Duo)' : `${u}+${u} Unit`}
                               </button>
                             ))}
                           </div>
                         ) : (
-                          <div className="flex flex-col gap-4 w-full max-w-md bg-slate-800/80 p-5 rounded-3xl border border-slate-700 shadow-inner">
-                            <div className="flex items-center gap-4">
-                              <label className="w-24 text-left font-bold text-blue-400 text-sm">MOVON</label>
-                              <input type="range" min="0" max="50" value={customMovon} onChange={(e) => setCustomMovon(parseInt(e.target.value))} className="flex-1 accent-blue-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer" />
-                              <span className="w-8 text-right font-black text-white">{customMovon}</span>
+                          <div className="flex flex-col gap-3 md:gap-4 w-full max-w-md bg-slate-800/80 p-4 md:p-5 rounded-2xl md:rounded-3xl border border-slate-700 shadow-inner">
+                            <div className="flex items-center gap-2 md:gap-4 w-full">
+                              <label className="w-16 md:w-24 text-left font-bold text-blue-400 text-[10px] md:text-sm">MOVON</label>
+                              <input type="range" min="0" max="50" value={customMovon} onChange={(e) => setCustomMovon(parseInt(e.target.value))} className="flex-1 accent-blue-500 h-1.5 md:h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer w-full" />
+                              <span className="w-6 md:w-8 text-right font-black text-white text-xs md:text-sm">{customMovon}</span>
                             </div>
-                            <div className="flex items-center gap-4">
-                              <label className="w-24 text-left font-bold text-rose-400 text-sm">CUCKOO</label>
-                              <input type="range" min="0" max="50" value={customCuckoo} onChange={(e) => setCustomCuckoo(parseInt(e.target.value))} className="flex-1 accent-rose-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer" />
-                              <span className="w-8 text-right font-black text-white">{customCuckoo}</span>
+                            <div className="flex items-center gap-2 md:gap-4 w-full">
+                              <label className="w-16 md:w-24 text-left font-bold text-rose-400 text-[10px] md:text-sm">CUCKOO</label>
+                              <input type="range" min="0" max="50" value={customCuckoo} onChange={(e) => setCustomCuckoo(parseInt(e.target.value))} className="flex-1 accent-rose-500 h-1.5 md:h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer w-full" />
+                              <span className="w-6 md:w-8 text-right font-black text-white text-xs md:text-sm">{customCuckoo}</span>
                             </div>
-                            <div className="flex items-center gap-4">
-                              <label className="w-24 text-left font-bold text-purple-400 text-sm">TEAM (SBI)</label>
-                              <input type="range" min="0" max="100" value={customGroup} onChange={(e) => setCustomGroup(parseInt(e.target.value))} className="flex-1 accent-purple-500 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer" />
-                              <span className="w-8 text-right font-black text-white">{customGroup}</span>
+                            <div className="flex items-center gap-2 md:gap-4 w-full">
+                              <label className="w-16 md:w-24 text-left font-bold text-purple-400 text-[10px] md:text-sm">TEAM (SBI)</label>
+                              <input type="range" min="0" max="100" value={customGroup} onChange={(e) => setCustomGroup(parseInt(e.target.value))} className="flex-1 accent-purple-500 h-1.5 md:h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer w-full" />
+                              <span className="w-6 md:w-8 text-right font-black text-white text-xs md:text-sm">{customGroup}</span>
                             </div>
                           </div>
                         )}
                       </div>
                     </div>
                     
-                    <div className="p-8 md:p-12 grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="p-6 md:p-12 grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
                       {/* HIERARCHY VISUAL */}
-                      <div className="flex flex-col items-center justify-center p-8 bg-slate-800/50 rounded-3xl border border-slate-700">
-                        <div className="flex flex-col items-center mb-8">
-                          <div className="w-24 h-24 bg-gradient-to-br from-[#0755C9] to-blue-400 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(7,85,201,0.5)] mb-4 border-4 border-slate-900 relative z-10">
-                            <span className="text-5xl text-white">👤</span>
+                      <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-slate-800/50 rounded-2xl md:rounded-3xl border border-slate-700">
+                        <div className="flex flex-col items-center mb-6 md:mb-8">
+                          <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-[#0755C9] to-blue-400 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(7,85,201,0.5)] mb-3 md:mb-4 border-2 md:border-4 border-slate-900 relative z-10">
+                            <span className="text-3xl md:text-5xl text-white">👤</span>
                           </div>
                           <div className="text-center">
-                            <span className="text-white font-black block text-xl tracking-widest">ANDA</span>
-                            <span className="text-cyan-400 font-bold text-sm block">{simData.totalUnits} Jualan Fizikal</span>
+                            <span className="text-white font-black block text-lg md:text-xl tracking-widest">ANDA</span>
+                            <span className="text-cyan-400 font-bold text-[10px] md:text-sm block">{simData.totalUnits} Jualan Fizikal</span>
                             {simData.pairedUnits > 0 && (
-                              <span className="text-[#FFC928] font-bold text-xs mt-1 block px-3 py-1 bg-[#FFC928]/10 rounded-full border border-[#FFC928]/30">
+                              <span className="text-[#FFC928] font-bold text-[9px] md:text-xs mt-1 block px-2 py-1 md:px-3 md:py-1 bg-[#FFC928]/10 rounded-full border border-[#FFC928]/30">
                                 🔥 Dikira {simData.effectiveTotalUnits} Nett Unit!
                               </span>
                             )}
                           </div>
                         </div>
 
-                        <div className="w-full max-w-[240px] h-10 border-t-4 border-l-4 border-r-4 border-slate-700 rounded-t-2xl relative -mt-4 mb-4">
-                          <div className="absolute left-1/2 top-0 w-1 h-6 bg-slate-700 -translate-x-1/2 -mt-6"></div>
+                        <div className="w-full max-w-[200px] md:max-w-[240px] h-6 md:h-10 border-t-2 md:border-t-4 border-l-2 md:border-l-4 border-r-2 md:border-r-4 border-slate-700 rounded-t-xl md:rounded-t-2xl relative -mt-3 md:-mt-4 mb-3 md:mb-4">
+                          <div className="absolute left-1/2 top-0 w-0.5 md:w-1 h-4 md:h-6 bg-slate-700 -translate-x-1/2 -mt-4 md:-mt-6"></div>
                         </div>
 
-                        <div className="flex w-full justify-around max-w-[340px]">
+                        <div className="flex w-full justify-around max-w-[280px] md:max-w-[340px]">
                           <div className="flex flex-col items-center">
-                            <div className="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mb-3 border-4 border-slate-900 relative z-10">
-                              <span className="text-3xl text-slate-400">👥</span>
+                            <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-700 rounded-full flex items-center justify-center mb-2 md:mb-3 border-2 md:border-4 border-slate-900 relative z-10">
+                              <span className="text-xl md:text-3xl text-slate-400">👥</span>
                             </div>
                             <div className="text-center">
-                              <span className="text-slate-300 font-bold block text-sm">Ejen Abu</span>
-                              <span className="text-slate-500 text-xs font-medium">{simData.agentA} Sales</span>
+                              <span className="text-slate-300 font-bold block text-[10px] md:text-sm">Ejen Abu</span>
+                              <span className="text-slate-500 text-[9px] md:text-xs font-medium">{simData.agentA} Sales</span>
                             </div>
                           </div>
                           <div className="flex flex-col items-center">
-                            <div className="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mb-3 border-4 border-slate-900 relative z-10">
-                              <span className="text-3xl text-slate-400">👥</span>
+                            <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-700 rounded-full flex items-center justify-center mb-2 md:mb-3 border-2 md:border-4 border-slate-900 relative z-10">
+                              <span className="text-xl md:text-3xl text-slate-400">👥</span>
                             </div>
                             <div className="text-center">
-                              <span className="text-slate-300 font-bold block text-sm">Ejen Siti</span>
-                              <span className="text-slate-500 text-xs font-medium">{simData.agentB} Sales</span>
+                              <span className="text-slate-300 font-bold block text-[10px] md:text-sm">Ejen Siti</span>
+                              <span className="text-slate-500 text-[9px] md:text-xs font-medium">{simData.agentB} Sales</span>
                             </div>
                           </div>
                         </div>
                       </div>
 
                       {/* RESULTS BREAKDOWN */}
-                      <div className="space-y-6 text-left">
-                        <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
-                          <h4 className="text-cyan-400 font-black mb-4 uppercase tracking-wider text-sm">1. Komisen Peribadi (Personal)</h4>
-                          <div className="space-y-3 mb-4 text-sm font-medium">
+                      <div className="space-y-4 md:space-y-6 text-left">
+                        <div className="bg-slate-800 rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-700">
+                          <h4 className="text-cyan-400 font-black mb-3 md:mb-4 uppercase tracking-wider text-[10px] md:text-sm">1. Komisen Peribadi (Personal)</h4>
+                          <div className="space-y-2 md:space-y-3 mb-3 md:mb-4 text-xs md:text-sm font-medium">
                             {simData.movonUnits > 0 && (
                               <div className="flex justify-between text-slate-300">
                                 <span>MOVON ({simData.movonUnits} x RM230)</span>
@@ -834,21 +836,21 @@
                               </div>
                             )}
                           </div>
-                          <div className="flex justify-between items-end pt-4 border-t border-slate-700">
-                            <span className="text-slate-400 text-xs font-bold uppercase">Total Personal</span>
-                            <span className="text-2xl font-black text-white">RM {simData.personalTotal.toLocaleString()}</span>
+                          <div className="flex justify-between items-end pt-3 md:pt-4 border-t border-slate-700">
+                            <span className="text-slate-400 text-[10px] md:text-xs font-bold uppercase">Total Personal</span>
+                            <span className="text-xl md:text-2xl font-black text-white">RM {simData.personalTotal.toLocaleString()}</span>
                           </div>
                           
                           {simData.pairedUnits > 0 && (
-                            <p className="text-[11px] text-slate-400 mt-4 leading-relaxed bg-slate-900/50 p-3 rounded-lg border border-slate-700/50">
+                            <p className="text-[9px] md:text-[11px] text-slate-400 mt-3 md:mt-4 leading-relaxed bg-slate-900/50 p-2 md:p-3 rounded-lg border border-slate-700/50">
                               * <strong className="text-[#FFC928]">Insentif Momentum Duo:</strong> Setiap pasangan (1 MOVON + 1 CUCKOO) membolehkan unit MOVON anda dikira sebagai <strong>1.5 Unit Nett</strong>. Kesemua unit ini sah untuk memburu kelayakan insentif bulanan!
                             </p>
                           )}
                         </div>
                         
-                        <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
-                          <h4 className="text-purple-400 font-black mb-4 uppercase tracking-wider text-sm">2. Komisen Kumpulan (Passive)</h4>
-                          <div className="space-y-3 mb-4 text-sm font-medium">
+                        <div className="bg-slate-800 rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-700">
+                          <h4 className="text-purple-400 font-black mb-3 md:mb-4 uppercase tracking-wider text-[10px] md:text-sm">2. Komisen Kumpulan (Passive)</h4>
+                          <div className="space-y-2 md:space-y-3 mb-3 md:mb-4 text-xs md:text-sm font-medium">
                             <div className="flex justify-between text-slate-300">
                               <span>Total Group Sales (Abu + Siti)</span>
                               <span className="text-white">{simData.groupSales} Unit</span>
@@ -858,18 +860,18 @@
                               <span className="text-green-400">+ RM {simData.sbiBonus.toLocaleString()}</span>
                             </div>
                           </div>
-                          <div className="flex justify-between items-end pt-4 border-t border-slate-700">
-                            <span className="text-slate-400 text-xs font-bold uppercase">Total Group</span>
-                            <span className="text-2xl font-black text-white">RM {simData.sbiBonus.toLocaleString()}</span>
+                          <div className="flex justify-between items-end pt-3 md:pt-4 border-t border-slate-700">
+                            <span className="text-slate-400 text-[10px] md:text-xs font-bold uppercase">Total Group</span>
+                            <span className="text-xl md:text-2xl font-black text-white">RM {simData.sbiBonus.toLocaleString()}</span>
                           </div>
                         </div>
 
-                        <div className="bg-gradient-to-r from-[#0755C9] to-blue-500 rounded-2xl p-6 shadow-lg border-2 border-blue-400 flex justify-between items-center transform md:scale-105 origin-left">
-                          <div>
-                            <span className="text-blue-100 font-black block text-xs mb-1 uppercase tracking-widest">GRAND TOTAL INCOME</span>
-                            <span className="text-blue-200 text-[10px] font-medium uppercase">Personal + Group Bonus</span>
+                        <div className="bg-gradient-to-r from-[#0755C9] to-blue-500 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg border-2 border-blue-400 flex flex-col sm:flex-row justify-between items-center transform lg:scale-105 origin-left gap-2 md:gap-0">
+                          <div className="text-center sm:text-left">
+                            <span className="text-blue-100 font-black block text-[10px] md:text-xs mb-0.5 md:mb-1 uppercase tracking-widest">GRAND TOTAL INCOME</span>
+                            <span className="text-blue-200 text-[9px] md:text-[10px] font-medium uppercase">Personal + Group Bonus</span>
                           </div>
-                          <span className="text-4xl font-black text-white drop-shadow-md">RM {simData.grandTotal.toLocaleString()}</span>
+                          <span className="text-2xl sm:text-3xl md:text-4xl font-black text-white drop-shadow-md">RM {simData.grandTotal.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
@@ -878,17 +880,17 @@
               </section>
 
               {/* 8. TESTIMONI PENDAPATAN */}
-              <section id="testimoni" className="py-24 px-6 bg-slate-50">
-                <div className="max-w-[1400px] mx-auto flex flex-col items-center text-center">
+              <section id="testimoni" className="py-16 md:py-24 px-4 md:px-6 bg-slate-50 w-full">
+                <div className="max-w-[1400px] mx-auto flex flex-col items-center text-center w-full">
                   <SectionTitle title="Bukti Pendapatan" subtitle="Mereka Sudah Buktikan, Kini Giliran Anda!" />
                   
-                  <div className="flex flex-col gap-12 w-full mt-8 max-w-5xl mx-auto">
+                  <div className="flex flex-col gap-6 md:gap-12 w-full mt-4 md:mt-8 max-w-5xl mx-auto">
                     {[
                       "https://lh3.googleusercontent.com/d/1PdYpTDk32ZzHSnT78fMqe5bB4yCeRvvB",
                       "https://lh3.googleusercontent.com/d/1kjFBsgvR1c_dnkKuDsEPTDZMa5OHW2F4",
                       "https://lh3.googleusercontent.com/d/1WRdvSJozr-2WaAbU6aa3hbfJwg2wZ934"
                     ].map((img, idx) => (
-                      <div key={idx} className="w-full bg-white border-4 border-slate-200 rounded-[2rem] overflow-hidden flex flex-col items-center justify-center shadow-2xl hover:shadow-[0_20px_50px_-15px_rgba(7,85,201,0.3)] transition-all group cursor-pointer">
+                      <div key={idx} className="w-full bg-white border-2 md:border-4 border-slate-200 rounded-xl md:rounded-[2rem] overflow-hidden flex flex-col items-center justify-center shadow-lg md:shadow-2xl hover:shadow-[0_10px_30px_-10px_rgba(7,85,201,0.3)] transition-all group cursor-pointer">
                         <img src={img} alt={`Testimoni ${idx + 1}`} className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700" loading="lazy" />
                       </div>
                     ))}
@@ -897,21 +899,21 @@
               </section>
 
               {/* 9. TASK: HOT MARKET & BROADCAST */}
-              <section id="action-task" className="py-24 px-6 bg-white border-t border-slate-200">
-                <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+              <section id="action-task" className="py-16 md:py-24 px-4 md:px-6 bg-white border-t border-slate-200 w-full">
+                <div className="max-w-5xl mx-auto flex flex-col items-center text-center w-full">
                   <SectionTitle title="Task Tindakan Segera" subtitle="Jana Komisen Pertama Anda HARI INI JUGA!" />
                   
-                  <p className="text-lg text-slate-600 font-medium mb-12 max-w-2xl">
+                  <p className="text-sm md:text-lg text-slate-600 font-medium mb-8 md:mb-12 max-w-2xl">
                     Langkah pertama yang paling berkesan adalah menawarkan promosi hebat ini kepada senarai <strong>Hot Market</strong> anda. Jangan tunggu esok!
                   </p>
 
-                  <div className="w-full bg-[#EFF7FF] rounded-[3rem] p-10 md:p-16 border border-blue-100 shadow-inner flex flex-col items-center mb-16 relative overflow-hidden">
-                    <h3 className="text-2xl font-black text-[#102653] mb-12 uppercase tracking-wide">Peta Minda Hot Market</h3>
+                  <div className="w-full bg-[#EFF7FF] rounded-2xl md:rounded-[3rem] p-4 sm:p-8 md:p-16 border border-blue-100 shadow-inner flex flex-col items-center mb-8 md:mb-16 relative overflow-hidden">
+                    <h3 className="text-lg md:text-2xl font-black text-[#102653] mb-6 md:mb-12 uppercase tracking-wide">Peta Minda Hot Market</h3>
                     
-                    {/* Visual Matahari (Sun Diagram) */}
-                    <div className="relative w-full max-w-md h-[400px] flex items-center justify-center mb-8">
+                    {/* Visual Matahari (Sun Diagram) - Dipastikan Scale untuk Skrin Kecil */}
+                    <div className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] flex items-center justify-center mb-4 md:mb-8 transform scale-[0.6] sm:scale-75 md:scale-100 origin-center mx-auto">
                       {/* Central Bubble */}
-                      <div className="w-28 h-28 bg-[#0755C9] text-white rounded-full flex items-center justify-center font-black text-xl z-20 shadow-[0_0_30px_rgba(7,85,201,0.5)] border-4 border-white absolute">
+                      <div className="w-24 h-24 md:w-28 md:h-28 bg-[#0755C9] text-white rounded-full flex items-center justify-center font-black text-lg md:text-xl z-20 shadow-[0_0_30px_rgba(7,85,201,0.5)] border-4 border-white absolute">
                         ANDA
                       </div>
                       
@@ -943,35 +945,35 @@
                       </div>
                     </div>
 
-                    <div className="w-full max-w-3xl mt-12 bg-white rounded-3xl p-8 shadow-md border-2 border-blue-200 text-left">
-                      <h4 className="text-xl md:text-2xl font-black text-[#0755C9] mb-6 border-b-2 border-blue-100 pb-4">Tugasan Live Zoom (Buat Sekarang!)</h4>
-                      <div className="space-y-6">
-                        <div className="flex gap-4 items-start">
-                          <div className="w-10 h-10 rounded-full bg-[#FFC928] text-[#102653] font-black flex items-center justify-center shrink-0 shadow-sm border-2 border-white">1</div>
+                    <div className="w-full max-w-3xl md:mt-12 bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-md border-2 border-blue-200 text-left">
+                      <h4 className="text-lg sm:text-xl md:text-2xl font-black text-[#0755C9] mb-4 md:mb-6 border-b-2 border-blue-100 pb-3 md:pb-4">Tugasan Live Zoom (Buat Sekarang!)</h4>
+                      <div className="space-y-4 md:space-y-6">
+                        <div className="flex gap-3 md:gap-4 items-start">
+                          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#FFC928] text-[#102653] font-black flex items-center justify-center shrink-0 shadow-sm border-2 border-white text-sm md:text-base">1</div>
                           <div>
-                            <h5 className="font-bold text-slate-800 text-lg">List Down Nama Prospek</h5>
-                            <p className="text-sm text-slate-600">Senaraikan 10 hingga 20 nama prospek berpotensi dari kategori peta minda di atas ke dalam buku nota / <i>phone</i> anda <b>sekarang juga</b>.</p>
+                            <h5 className="font-bold text-slate-800 text-sm md:text-lg">List Down Nama Prospek</h5>
+                            <p className="text-[11px] md:text-sm text-slate-600 mt-1 md:mt-0">Senaraikan 10 hingga 20 nama prospek berpotensi dari kategori peta minda di atas ke dalam buku nota / <i>phone</i> anda <b>sekarang juga</b>.</p>
                           </div>
                         </div>
-                        <div className="flex gap-4 items-start">
-                          <div className="w-10 h-10 rounded-full bg-[#FFC928] text-[#102653] font-black flex items-center justify-center shrink-0 shadow-sm border-2 border-white">2</div>
+                        <div className="flex gap-3 md:gap-4 items-start">
+                          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#FFC928] text-[#102653] font-black flex items-center justify-center shrink-0 shadow-sm border-2 border-white text-sm md:text-base">2</div>
                           <div>
-                            <h5 className="font-bold text-slate-800 text-lg">Buat WhatsApp Broadcast / Mesej</h5>
-                            <p className="text-sm text-slate-600">Gunakan poster promosi dan ayat <i>copywriting</i> yang telah diberikan oleh leader sebentar tadi, dan <b>HANTAR TERUS</b> kepada senarai nama tersebut <b>sekarang</b>!</p>
+                            <h5 className="font-bold text-slate-800 text-sm md:text-lg">Buat WhatsApp Broadcast / Mesej</h5>
+                            <p className="text-[11px] md:text-sm text-slate-600 mt-1 md:mt-0">Gunakan poster promosi dan ayat <i>copywriting</i> yang telah diberikan oleh leader sebentar tadi, dan <b>HANTAR TERUS</b> kepada senarai nama tersebut <b>sekarang</b>!</p>
                           </div>
                         </div>
-                        <div className="flex gap-4 items-start">
-                          <div className="w-10 h-10 rounded-full bg-[#FFC928] text-[#102653] font-black flex items-center justify-center shrink-0 shadow-sm border-2 border-white">3</div>
+                        <div className="flex gap-3 md:gap-4 items-start">
+                          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#FFC928] text-[#102653] font-black flex items-center justify-center shrink-0 shadow-sm border-2 border-white text-sm md:text-base">3</div>
                           <div>
-                            <h5 className="font-bold text-slate-800 text-lg">Update Status di Group</h5>
-                            <p className="text-sm text-slate-600">Screenshot bukti anda dah berjaya hantar <i>broadcast</i> / mesej pertama anda, dan kongsikan di dalam <b>Group WhatsApp</b> untuk pembakar semangat!</p>
+                            <h5 className="font-bold text-slate-800 text-sm md:text-lg">Update Status di Group</h5>
+                            <p className="text-[11px] md:text-sm text-slate-600 mt-1 md:mt-0">Screenshot bukti anda dah berjaya hantar <i>broadcast</i> / mesej pertama anda, dan kongsikan di dalam <b>Group WhatsApp</b> untuk pembakar semangat!</p>
                           </div>
                         </div>
-                        <div className="flex gap-4 items-start">
-                          <div className="w-10 h-10 rounded-full bg-red-500 text-white font-black flex items-center justify-center shrink-0 shadow-lg border-2 border-white animate-pulse">4</div>
+                        <div className="flex gap-3 md:gap-4 items-start">
+                          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-500 text-white font-black flex items-center justify-center shrink-0 shadow-lg border-2 border-white animate-pulse text-sm md:text-base">4</div>
                           <div>
-                            <h5 className="font-bold text-red-600 text-lg">Reward Khas (Close On The Spot!)</h5>
-                            <p className="text-sm text-slate-600">Siapa yang berjaya dapatkan pelanggan dan <i>close sale</i> <b>sekarang juga</b> semasa sesi Zoom ini sedang berlangsung, anda akan menerima <b>REWARD MISTERI</b> daripada Leader malam ini!</p>
+                            <h5 className="font-bold text-red-600 text-sm md:text-lg">Reward Khas (Close On The Spot!)</h5>
+                            <p className="text-[11px] md:text-sm text-slate-600 mt-1 md:mt-0">Siapa yang berjaya dapatkan pelanggan dan <i>close sale</i> <b>sekarang juga</b> semasa sesi Zoom ini sedang berlangsung, anda akan menerima <b>REWARD MISTERI</b> daripada Leader malam ini!</p>
                           </div>
                         </div>
                       </div>
@@ -980,19 +982,19 @@
                 </div>
               </section>
 
-              <section className="py-32 px-6 bg-gradient-to-b from-[#102653] to-slate-950 flex flex-col items-center justify-center text-center">
-                <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight">SEDIA UNTUK BERMULA?</h2>
-                <p className="text-2xl md:text-3xl text-blue-200 mb-16 max-w-3xl font-light leading-relaxed">
+              <section className="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-b from-[#102653] to-slate-950 flex flex-col items-center justify-center text-center w-full">
+                <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white mb-6 md:mb-8 tracking-tight">SEDIA UNTUK BERMULA?</h2>
+                <p className="text-base sm:text-2xl md:text-3xl text-blue-200 mb-10 md:mb-16 max-w-3xl font-light leading-relaxed">
                   Sertai keluarga besar <strong className="text-white">MOVON SALES TEAM</strong> sekarang.
                 </p>
-                <div className="flex flex-wrap justify-center gap-6 text-xl md:text-2xl font-bold text-[#FFC928] uppercase tracking-widest bg-white/5 px-8 py-5 rounded-full border border-white/10 shadow-lg">
-                  <span>Belajar</span> <span className="opacity-40">•</span> <span>Bertindak</span> <span className="opacity-40">•</span> <span>Konsisten</span>
+                <div className="flex flex-wrap justify-center gap-3 md:gap-6 text-sm sm:text-xl md:text-2xl font-bold text-[#FFC928] uppercase tracking-wider md:tracking-widest bg-white/5 px-6 md:px-8 py-3 md:py-5 rounded-full border border-white/10 shadow-lg items-center">
+                  <span>Belajar</span> <span className="opacity-40 text-xs md:text-base">•</span> <span>Bertindak</span> <span className="opacity-40 text-xs md:text-base">•</span> <span>Konsisten</span>
                 </div>
               </section>
               
-              <footer className="bg-slate-950 text-slate-500 py-10 text-center text-sm md:text-base border-t border-white/10">
+              <footer className="bg-slate-950 text-slate-500 py-8 md:py-10 text-center text-[10px] md:text-sm lg:text-base border-t border-white/10 w-full px-4">
                 <p>&copy; {new Date().getFullYear()} MOVON SALES TEAM. For Internal Training & Presentation Purpose Only.</p>
-                <p className="mt-2 font-medium text-slate-600">&copy; Ihsanuddin Adli</p>
+                <p className="mt-1 md:mt-2 font-medium text-slate-600">&copy; Ihsanuddin Adli</p>
               </footer>
             </div>
           );
