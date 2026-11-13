@@ -65,7 +65,7 @@
               // LOGIK MOMENTUM DUO (PAIRING)
               const pairedUnits = Math.min(movonUnits, cuckooUnits);
               const bonusUnitsFromPair = pairedUnits * 0.5; // Setiap pair tambah 0.5 unit
-              const effectiveTotalUnits = totalUnits + bonusUnitsFromPair; // Unit Nett yang digunapakai untuk Insentif
+              const effectiveTotalUnits = totalUnits + bonusUnitsFromPair; // Unit Nett yang digunapakai untuk Insentif DUO SAHAJA
               
               // Basic Commission
               const movonComm = movonUnits * 230;
@@ -88,8 +88,8 @@
                   return 0;
               };
               
-              // Kedua-dua MOVON & CUCKOO menyumbang kepada insentif berdasarkan Nett Unit (Effective Total Units)
-              const boosterBonus = getBooster(effectiveTotalUnits);
+              // Booster guna total unit fizikal biasa, Duo guna Unit Nett (Pairing)
+              const boosterBonus = getBooster(totalUnits);
               const duoBonus = getDuo(effectiveTotalUnits);
               
               // Simulasi Group Sales
@@ -102,8 +102,8 @@
                   agentA = Math.ceil(customGroup / 2);
                   agentB = Math.floor(customGroup / 2);
               } else {
-                  agentA = Math.floor(effectiveTotalUnits * 1.5);
-                  agentB = Math.floor(effectiveTotalUnits * 1.2);
+                  agentA = Math.floor(totalUnits * 1.5);
+                  agentB = Math.floor(totalUnits * 1.2);
                   groupSales = agentA + agentB;
               }
               
@@ -869,7 +869,7 @@
                             
                             {simData.boosterBonus > 0 && (
                               <div className="flex justify-between text-slate-300 border-t border-slate-700 pt-2 mt-2">
-                                <span>Momentum Booster ({simData.effectiveTotalUnits} Unit)</span>
+                                <span>Momentum Booster ({simData.totalUnits} Unit)</span>
                                 <span className="text-green-400">+ RM {simData.boosterBonus.toLocaleString()}</span>
                               </div>
                             )}
