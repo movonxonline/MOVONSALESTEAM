@@ -49,27 +49,35 @@
           const [calcUnits, setCalcUnits] = useState(10); // 5, 6, 10, 15, 20
           const [customMovon, setCustomMovon] = useState(5);
           const [customCuckoo, setCustomCuckoo] = useState(5);
+          const [customCuckooHalf, setCustomCuckooHalf] = useState(0);
           const [customGroup, setCustomGroup] = useState(20);
           
           const getSimulationData = () => {
               let movonUnits = 0;
               let cuckooUnits = 0;
+              let cuckooHalfUnits = 0;
               
               if (calcMode === 'MOVON') { movonUnits = calcUnits; cuckooUnits = 0; }
               else if (calcMode === 'CUCKOO') { movonUnits = 0; cuckooUnits = calcUnits; }
               else if (calcMode === 'MIXED') { movonUnits = calcUnits; cuckooUnits = calcUnits; }
-              else if (calcMode === 'CUSTOM') { movonUnits = customMovon; cuckooUnits = customCuckoo; }
+              else if (calcMode === 'CUSTOM') { 
+                  movonUnits = customMovon; 
+                  cuckooUnits = customCuckoo; 
+                  cuckooHalfUnits = customCuckooHalf; 
+              }
               
-              const totalUnits = movonUnits + cuckooUnits;
+              const cuckooNetUnits = cuckooUnits + (cuckooHalfUnits * 0.5);
+              const totalNetUnits = movonUnits + cuckooNetUnits;
+              const totalPhysicalUnits = movonUnits + cuckooUnits + cuckooHalfUnits;
               
               // LOGIK MOMENTUM DUO (PAIRING)
-              const pairedUnits = Math.min(movonUnits, cuckooUnits);
+              const pairedUnits = Math.min(movonUnits, cuckooNetUnits);
               const bonusUnitsFromPair = pairedUnits * 0.5; // Setiap pair tambah 0.5 unit
-              const effectiveTotalUnits = totalUnits + bonusUnitsFromPair; // Unit Nett yang digunapakai untuk Insentif DUO SAHAJA
+              const effectiveTotalUnits = totalNetUnits + bonusUnitsFromPair; // Unit Nett yang digunapakai untuk Insentif DUO SAHAJA
               
               // Basic Commission
               const movonComm = movonUnits * 230;
-              const cuckooComm = cuckooUnits * 100;
+              const cuckooComm = Math.floor(cuckooNetUnits) * 100;
               const baseComm = movonComm + cuckooComm;
               
               const getBooster = (units) => {
@@ -88,8 +96,8 @@
                   return 0;
               };
               
-              // Booster guna total unit fizikal biasa, Duo guna Unit Nett (Pairing)
-              const boosterBonus = getBooster(totalUnits);
+              // Booster guna total unit nett, Duo guna Unit Nett (Pairing)
+              const boosterBonus = getBooster(totalNetUnits);
               const duoBonus = getDuo(effectiveTotalUnits);
               
               // Simulasi Group Sales
@@ -102,8 +110,8 @@
                   agentA = Math.ceil(customGroup / 2);
                   agentB = Math.floor(customGroup / 2);
               } else {
-                  agentA = Math.floor(totalUnits * 1.5);
-                  agentB = Math.floor(totalUnits * 1.2);
+                  agentA = Math.floor(totalNetUnits * 1.5);
+                  agentB = Math.floor(totalNetUnits * 1.2);
                   groupSales = agentA + agentB;
               }
               
@@ -116,12 +124,12 @@
                   return 0;
               };
               
-              const sbiBonus = getSBI(groupSales);
+              const sbiBonus = totalNetUnits >= 5 ? getSBI(groupSales) : 0;
               const personalTotal = baseComm + boosterBonus + duoBonus;
               const grandTotal = personalTotal + sbiBonus;
               
               return {
-                  movonUnits, cuckooUnits, totalUnits, effectiveTotalUnits, pairedUnits,
+                  movonUnits, cuckooUnits, cuckooHalfUnits, cuckooNetUnits, totalNetUnits, totalPhysicalUnits, effectiveTotalUnits, pairedUnits,
                   movonComm, cuckooComm, baseComm,
                   boosterBonus, duoBonus,
                   personalTotal,
@@ -272,7 +280,7 @@
                         ] 
                       },
                       { 
-                        title: "MOVON × CUCKOO", 
+                        title: "MOVON CHOICE", 
                         color: "text-red-600", 
                         bg: "bg-red-50", 
                         border: "border-red-200",
@@ -343,7 +351,7 @@
                       </div>
                       {/* Promosi CUCKOO */}
                       <div className="w-full rounded-xl md:rounded-[2rem] overflow-hidden shadow-xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
-                        <img src="https://lh3.googleusercontent.com/d/1VFzcv8HJXHIo5jHa4ESHTqz8MfX5RUxJ" alt="Promosi CUCKOO" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
+                        <img src="https://lh3.googleusercontent.com/d/1l6nNOLsf3Nd4eLs5K4dKYNNhxrKwJSy6" alt="Promosi CUCKOO" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
                       </div>
                     </div>
                   </div>
@@ -630,9 +638,22 @@
                           <span className="text-sm md:text-xl font-bold text-slate-600">MOVON Space / Baby / Choice</span>
                           <span className="text-xl md:text-3xl font-black text-[#0755C9]">RM230</span>
                         </div>
+                        <div className="flex justify-between items-center border-b border-slate-100 pb-4 md:pb-6">
+                          <span className="text-sm md:text-xl font-bold text-slate-600">MOVON Choice : CUCKOO (Standard)</span>
+                          <div className="text-right">
+                             <span className="text-xl md:text-3xl font-black text-[#0755C9]">RM100</span>
+                             <span className="block text-[10px] md:text-xs font-bold text-slate-400 mt-1">1 Unit Nett</span>
+                          </div>
+                        </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm md:text-xl font-bold text-slate-600">MOVON Choice : CUCKOO</span>
-                          <span className="text-xl md:text-3xl font-black text-[#0755C9]">RM100</span>
+                          <div className="flex flex-col">
+                              <span className="text-sm md:text-xl font-bold text-slate-600">CUCKOO (Item 0.5 Unit)</span>
+                              <span className="text-[10px] md:text-xs text-slate-500 font-medium max-w-[200px] md:max-w-xs mt-1">* King Top 2 (GOOOD Plan), CUCKOO x SAMSUNG (TV, Peti Sejuk, Mesin Basuh)</span>
+                          </div>
+                          <div className="text-right shrink-0">
+                              <span className="text-xl md:text-3xl font-black text-slate-400">RM0</span>
+                              <span className="block text-[10px] md:text-xs font-bold text-rose-500 mt-1">Kumpul genap 1 Nett = RM100</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -791,9 +812,14 @@
                               <span className="w-6 md:w-8 text-right font-black text-white text-xs md:text-sm">{customMovon}</span>
                             </div>
                             <div className="flex items-center gap-2 md:gap-4 w-full">
-                              <label className="w-16 md:w-24 text-left font-bold text-rose-400 text-[10px] md:text-sm">CUCKOO</label>
+                              <label className="w-16 md:w-24 text-left font-bold text-rose-400 text-[10px] md:text-sm leading-tight">CUCKOO (1.0)</label>
                               <input type="range" min="0" max="50" value={customCuckoo} onChange={(e) => setCustomCuckoo(parseInt(e.target.value))} className="flex-1 accent-rose-500 h-1.5 md:h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer w-full" />
                               <span className="w-6 md:w-8 text-right font-black text-white text-xs md:text-sm">{customCuckoo}</span>
+                            </div>
+                            <div className="flex items-center gap-2 md:gap-4 w-full">
+                              <label className="w-16 md:w-24 text-left font-bold text-pink-400 text-[10px] md:text-sm leading-tight">CUCKOO (0.5)</label>
+                              <input type="range" min="0" max="50" value={customCuckooHalf} onChange={(e) => setCustomCuckooHalf(parseInt(e.target.value))} className="flex-1 accent-pink-500 h-1.5 md:h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer w-full" />
+                              <span className="w-6 md:w-8 text-right font-black text-white text-xs md:text-sm">{customCuckooHalf}</span>
                             </div>
                             <div className="flex items-center gap-2 md:gap-4 w-full">
                               <label className="w-16 md:w-24 text-left font-bold text-purple-400 text-[10px] md:text-sm">TEAM (SBI)</label>
@@ -814,10 +840,11 @@
                           </div>
                           <div className="text-center">
                             <span className="text-white font-black block text-lg md:text-xl tracking-widest">ANDA</span>
-                            <span className="text-cyan-400 font-bold text-[10px] md:text-sm block">{simData.totalUnits} Jualan Fizikal</span>
+                            <span className="text-cyan-400 font-bold text-[10px] md:text-sm block">{simData.totalPhysicalUnits} Jualan Fizikal</span>
+                            <span className="text-green-400 font-bold text-[10px] md:text-xs block">({simData.totalNetUnits} Unit Nett)</span>
                             {simData.pairedUnits > 0 && (
                               <span className="text-[#FFC928] font-bold text-[9px] md:text-xs mt-1 block px-2 py-1 md:px-3 md:py-1 bg-[#FFC928]/10 rounded-full border border-[#FFC928]/30">
-                                🔥 Dikira {simData.effectiveTotalUnits} Nett Unit!
+                                🔥 Dikira {simData.effectiveTotalUnits} Nett Unit! (Duo)
                               </span>
                             )}
                           </div>
@@ -860,16 +887,22 @@
                                 <span className="text-white">RM {simData.movonComm.toLocaleString()}</span>
                               </div>
                             )}
-                            {simData.cuckooUnits > 0 && (
+                            {Math.floor(simData.cuckooNetUnits) > 0 && (
                               <div className="flex justify-between text-slate-300">
-                                <span>CUCKOO ({simData.cuckooUnits} x RM100)</span>
+                                <span>CUCKOO (Genap {Math.floor(simData.cuckooNetUnits)} Unit x RM100)</span>
                                 <span className="text-white">RM {simData.cuckooComm.toLocaleString()}</span>
+                              </div>
+                            )}
+                            {simData.cuckooNetUnits % 1 !== 0 && (
+                              <div className="flex justify-between text-slate-400 text-[10px] md:text-xs">
+                                <span>* Baki {simData.cuckooNetUnits % 1} Unit CUCKOO (Belum Genap)</span>
+                                <span className="text-slate-500">RM 0</span>
                               </div>
                             )}
                             
                             {simData.boosterBonus > 0 && (
                               <div className="flex justify-between text-slate-300 border-t border-slate-700 pt-2 mt-2">
-                                <span>Momentum Booster ({simData.totalUnits} Unit)</span>
+                                <span>Momentum Booster ({simData.totalNetUnits} Unit)</span>
                                 <span className="text-green-400">+ RM {simData.boosterBonus.toLocaleString()}</span>
                               </div>
                             )}
@@ -902,8 +935,13 @@
                             </div>
                             <div className="flex justify-between text-slate-300">
                               <span>Star Builder Incentive (SBI)</span>
-                              <span className="text-green-400">+ RM {simData.sbiBonus.toLocaleString()}</span>
+                              <span className={simData.sbiBonus > 0 ? "text-green-400" : "text-slate-500"}>+ RM {simData.sbiBonus.toLocaleString()}</span>
                             </div>
+                            {simData.totalNetUnits < 5 && simData.groupSales >= 10 && (
+                              <div className="text-[10px] md:text-xs text-rose-400 text-right mt-1 font-bold">
+                                * Gagal Claim: Personal Sales mesti ≥ 5 Unit Nett
+                              </div>
+                            )}
                           </div>
                           <div className="flex justify-between items-end pt-3 md:pt-4 border-t border-slate-700">
                             <span className="text-slate-400 text-[10px] md:text-xs font-bold uppercase">Total Group</span>
