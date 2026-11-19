@@ -233,7 +233,7 @@
                 <div className="max-w-5xl mx-auto flex flex-col items-center text-center w-full">
                   <SectionTitle title="Intro MST" subtitle="Satu Pasukan, Satu Matlamat, Jaya Bersama" />
                   <div className="w-full max-w-4xl mx-auto rounded-xl md:rounded-[2rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white bg-slate-50 flex items-center justify-center">
-                    <img src="https://lh3.googleusercontent.com/d/1D8cEbjFDcqjEHPGVkUaN829W8y6SOqoy" alt="Intro MST" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" loading="lazy" />
+                    <img src="https://lh3.googleusercontent.com/d/1-F7xIu03qIagMHWiifHdd3sWx8oWJTCy" alt="Intro MST" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" loading="lazy" />
                   </div>
                 </div>
               </section>
@@ -444,137 +444,26 @@
                   {/* FLOW PROCESS SECTION */}
                   <SectionTitle title="SALES FLOW PENGURUSAN ORDER" subtitle="Aliran proses dari pendaftaran hingga pemasangan" />
                   
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 w-full mt-4 md:mt-6 items-start">
+                  <div className="w-full max-w-5xl flex flex-col gap-12 md:gap-16 mx-auto mt-4 md:mt-6">
                     {/* MOVON FLOW */}
-                    <div className="bg-white/80 backdrop-blur-xl rounded-2xl md:rounded-[3rem] shadow-[0_10px_30px_-10px_rgba(7,85,201,0.15)] md:shadow-[0_20px_50px_-15px_rgba(7,85,201,0.15)] p-4 sm:p-6 md:p-12 relative border-2 border-white w-full">
-                      <div className="bg-gradient-to-r from-blue-600 to-[#102653] text-white py-2 md:py-3 px-6 md:px-8 rounded-full inline-flex items-center gap-2 md:gap-3 shadow-lg shadow-blue-500/30 mb-8 md:mb-12 transform -translate-y-6 md:-translate-y-8 lg:-translate-y-16">
+                    <div className="flex flex-col items-start w-full">
+                      <div className="bg-gradient-to-r from-blue-600 to-[#102653] text-white py-2 md:py-3 px-6 md:px-8 rounded-full inline-flex items-center gap-2 md:gap-3 shadow-lg shadow-blue-500/30 mb-6">
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-sm md:text-xl backdrop-blur-sm">M</div>
                         <span className="font-black tracking-wider md:tracking-widest text-sm md:text-lg">MOVON FLOW</span>
                       </div>
-                      
-                      <div className="relative flex flex-col items-center w-full">
-                        <div className="absolute left-1/2 top-0 bottom-24 md:bottom-32 w-0.5 md:w-1 -translate-x-1/2 border-l-2 md:border-l-4 border-dotted border-blue-200 z-0"></div>
-                        
-                        <div className="w-full flex flex-col items-center gap-4 md:gap-8 mb-8 md:mb-12">
-                          {[
-                            { num: "01", icon: "⌨️", title: "Key-In Order", desc: "Isi data prospek dalam portal" },
-                            { num: "02", icon: "✍️", title: "Sign & eKYC", desc: "Pelanggan verify IC melalui link" },
-                            { num: "03", icon: "💳", title: "Payment", desc: "Bayaran / Update Kad (RM0)" }
-                          ].map((step, idx) => (
-                            <div key={idx} className="relative z-10 bg-white border border-blue-50 rounded-full p-2 md:p-3 pr-4 md:pr-8 flex items-center gap-3 md:gap-5 shadow-[0_5px_15px_-5px_rgba(7,85,201,0.1)] w-full max-w-[280px] md:max-w-sm hover:scale-105 transition-all cursor-default group">
-                              <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 relative">
-                                <span className="text-xl md:text-3xl">{step.icon}</span>
-                                <div className="absolute -top-1 -left-1 w-5 h-5 md:w-7 md:h-7 bg-[#FFC928] rounded-full text-[#102653] font-black text-[10px] md:text-sm flex items-center justify-center border md:border-2 border-white">{step.num}</div>
-                              </div>
-                              <div className="text-left flex-1">
-                                <h4 className="font-bold text-slate-800 text-sm md:text-lg leading-tight">{step.title}</h4>
-                                <p className="text-[10px] md:text-sm text-slate-500 font-medium leading-tight md:leading-normal mt-0.5 md:mt-0">{step.desc}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-
-                        <div className="relative z-10 bg-white border md:border-2 border-dashed border-blue-300 text-blue-600 px-4 md:px-6 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-black shadow-sm mb-6 md:mb-10 flex items-center gap-2 text-center">
-                          <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-500 rounded-full animate-ping shrink-0"></span>
-                          RISK ASSESSMENT (HQ)
-                        </div>
-
-                        {/* RESPONSIVE GRID FOR MOVON CARDS */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full relative z-10 max-w-lg mx-auto">
-                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl md:rounded-3xl p-4 md:p-6 border border-green-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-1 md:h-2 bg-green-400"></div>
-                            <div className="bg-green-500 text-white px-4 md:px-5 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-black shadow-sm mb-4 md:mb-6">✅ LULUS</div>
-                            <div className="flex flex-col gap-2 md:gap-3 w-full">
-                              <div className="bg-white rounded-lg md:rounded-xl p-2 md:p-3 flex items-center justify-center gap-2 md:gap-3 shadow-sm border border-green-50">
-                                <div className="bg-green-100 p-1.5 md:p-2 rounded-md md:rounded-lg text-green-600"><span className="text-sm md:text-xl">📞</span></div>
-                                <span className="text-xs md:text-sm font-bold text-slate-700">Call Log</span>
-                              </div>
-                              <div className="flex justify-center -my-1.5 md:-my-2 text-green-400"><span className="text-sm md:text-xl">⬇️</span></div>
-                              <div className="bg-white rounded-lg md:rounded-xl p-2 md:p-3 flex items-center justify-center gap-2 md:gap-3 shadow-sm border border-green-50">
-                                <div className="bg-green-100 p-1.5 md:p-2 rounded-md md:rounded-lg text-green-600"><span className="text-sm md:text-xl">🚚</span></div>
-                                <span className="text-xs md:text-sm font-bold text-slate-700">Installation</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl md:rounded-3xl p-4 md:p-6 border border-red-100 flex flex-col items-center justify-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-1 md:h-2 bg-red-400"></div>
-                            <div className="bg-red-500 text-white px-4 md:px-5 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-black shadow-sm mb-4 md:mb-6">❌ REJECTED</div>
-                            <div className="bg-white rounded-lg md:rounded-xl p-3 md:p-5 text-center shadow-sm border border-red-50 w-full">
-                              <p className="text-xs md:text-sm font-bold text-slate-600 leading-relaxed">Boleh reapply atas<br/>nama lain / waris</p>
-                            </div>
-                          </div>
-                        </div>
+                      <div className="w-full rounded-xl md:rounded-[2rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white bg-white flex items-center justify-center">
+                        <img src="https://lh3.googleusercontent.com/d/1kGNlo0FJ316x85hdSc8cIbY-HeCILORt" alt="MOVON Sales Flow" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" loading="lazy" />
                       </div>
                     </div>
 
                     {/* CUCKOO FLOW */}
-                    <div className="bg-white/80 backdrop-blur-xl rounded-2xl md:rounded-[3rem] shadow-[0_10px_30px_-10px_rgba(245,48,69,0.15)] md:shadow-[0_20px_50px_-15px_rgba(245,48,69,0.15)] p-4 sm:p-6 md:p-12 relative border-2 border-white w-full lg:mt-0 mt-8">
-                      <div className="bg-gradient-to-r from-red-600 to-rose-900 text-white py-2 md:py-3 px-6 md:px-8 rounded-full inline-flex items-center gap-2 md:gap-3 shadow-lg shadow-red-500/30 mb-8 md:mb-12 transform -translate-y-6 md:-translate-y-8 lg:-translate-y-16">
+                    <div className="flex flex-col items-start w-full">
+                      <div className="bg-gradient-to-r from-red-600 to-rose-900 text-white py-2 md:py-3 px-6 md:px-8 rounded-full inline-flex items-center gap-2 md:gap-3 shadow-lg shadow-red-500/30 mb-6">
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-sm md:text-xl backdrop-blur-sm">C</div>
                         <span className="font-black tracking-wider md:tracking-widest text-sm md:text-lg">CUCKOO FLOW</span>
                       </div>
-                      
-                      <div className="relative flex flex-col items-center w-full">
-                        <div className="absolute left-1/2 top-0 bottom-32 md:bottom-40 w-0.5 md:w-1 -translate-x-1/2 border-l-2 md:border-l-4 border-dotted border-red-200 z-0"></div>
-                        
-                        <div className="w-full flex flex-col items-center gap-4 md:gap-8 mb-8 md:mb-12">
-                          {[
-                            { num: "01", icon: "⌨️", title: "Key-In Order", desc: "Isi data dlm sistem portal yg sama" },
-                            { num: "02", icon: "✍️", title: "Sign Agreement", desc: "Pelanggan sign agreement" },
-                            { num: "03", icon: "💳", title: "Payment", desc: "Bayaran advance (jika ada)" }
-                          ].map((step, idx) => (
-                            <div key={idx} className="relative z-10 bg-white border border-red-50 rounded-full p-2 md:p-3 pr-4 md:pr-8 flex items-center gap-3 md:gap-5 shadow-[0_5px_15px_-5px_rgba(245,48,69,0.1)] w-full max-w-[280px] md:max-w-sm hover:scale-105 transition-all cursor-default group">
-                              <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-full bg-red-50 text-red-600 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 relative">
-                                <span className="text-xl md:text-3xl">{step.icon}</span>
-                                <div className="absolute -top-1 -left-1 w-5 h-5 md:w-7 md:h-7 bg-[#FFC928] rounded-full text-[#102653] font-black text-[10px] md:text-sm flex items-center justify-center border md:border-2 border-white">{step.num}</div>
-                              </div>
-                              <div className="text-left flex-1">
-                                <h4 className="font-bold text-slate-800 text-sm md:text-lg leading-tight">{step.title}</h4>
-                                <p className="text-[10px] md:text-sm text-slate-500 font-medium leading-tight md:leading-normal mt-0.5 md:mt-0">{step.desc}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-
-                        <div className="relative z-10 bg-white border md:border-2 border-dashed border-red-300 text-red-600 px-4 md:px-6 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-black shadow-sm mb-6 md:mb-10 flex items-center gap-2 text-center">
-                          <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-red-500 rounded-full animate-ping shrink-0"></span>
-                          DOCUMENT VERIFY
-                        </div>
-
-                        {/* RESPONSIVE GRID FOR CUCKOO CARDS (Stack on mobile, row on tablet/desktop) */}
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full relative z-10 max-w-2xl mx-auto">
-                          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl md:rounded-3xl p-3 md:p-4 border border-green-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-1 md:h-2 bg-green-400"></div>
-                            <div className="bg-green-500 text-white px-2 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-black shadow-sm mb-3 md:mb-4 w-full text-center">✅ LULUS</div>
-                            <div className="flex flex-col w-full text-[10px] md:text-xs font-bold text-slate-600 text-center gap-1.5 md:gap-2 mt-auto mb-auto">
-                              <div className="bg-white rounded-lg md:rounded-xl border border-green-100 py-1.5 md:py-2 shadow-sm">Risk Assess</div>
-                              <div className="bg-white rounded-lg md:rounded-xl border border-green-100 py-1.5 md:py-2 shadow-sm">Call Log</div>
-                              <div className="bg-white rounded-lg md:rounded-xl border border-green-100 py-1.5 md:py-2 shadow-sm">Install</div>
-                            </div>
-                          </div>
-
-                          <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl md:rounded-3xl p-3 md:p-4 border border-amber-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-1 md:h-2 bg-amber-400"></div>
-                            <div className="bg-amber-500 text-white px-2 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-black shadow-sm mb-3 md:mb-4 w-full text-center">⚠️ RETURN</div>
-                            <div className="flex flex-col w-full text-[9px] md:text-[10px] sm:text-xs font-bold text-slate-600 text-center gap-1 md:gap-1.5">
-                              <div className="bg-white rounded-md md:rounded-lg border border-amber-100 py-1 md:py-1.5 shadow-sm">Doc Submit</div>
-                              <div className="bg-white rounded-md md:rounded-lg border border-amber-100 py-1 md:py-1.5 shadow-sm">Verify Semula</div>
-                              <div className="bg-white rounded-md md:rounded-lg border border-green-100 py-1 md:py-1.5 shadow-sm text-green-600">Lulus</div>
-                              <div className="bg-white rounded-md md:rounded-lg border border-green-100 py-1 md:py-1.5 shadow-sm">Risk Assess</div>
-                              <div className="bg-white rounded-md md:rounded-lg border border-green-100 py-1 md:py-1.5 shadow-sm">Call Log</div>
-                              <div className="bg-white rounded-md md:rounded-lg border border-green-100 py-1 md:py-1.5 shadow-sm">Install</div>
-                            </div>
-                          </div>
-
-                          <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl md:rounded-3xl p-3 md:p-4 border border-red-100 flex flex-col items-center shadow-md hover:-translate-y-1 transition-transform relative overflow-hidden">
-                            <div className="absolute top-0 w-full h-1 md:h-2 bg-red-400"></div>
-                            <div className="bg-red-500 text-white px-2 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-black shadow-sm mb-3 md:mb-4 w-full text-center">❌ REJECTED</div>
-                            <div className="bg-white rounded-lg md:rounded-xl p-2 md:p-3 text-center shadow-sm border border-red-50 w-full mt-auto mb-auto">
-                              <p className="text-[10px] md:text-xs font-bold text-slate-600 leading-relaxed">Boleh reapply<br/>atas nama<br/>lain / waris</p>
-                            </div>
-                          </div>
-                        </div>
+                      <div className="w-full rounded-xl md:rounded-[2rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white bg-white flex items-center justify-center">
+                        <img src="https://lh3.googleusercontent.com/d/1e6SYXtJkzBVNdCZV6NxqjBZ_kCYoVDQY" alt="CUCKOO Sales Flow" className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" loading="lazy" />
                       </div>
                     </div>
                   </div>
