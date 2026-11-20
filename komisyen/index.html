@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kalkulator Komisyen MST</title>
+    
+    <!-- Tailwind CSS untuk Styling Pantas & Responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Konfigurasi Tema Tailwind (Pilihan Warna) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mst: {
+                            dark: '#102653',
+                            blue: '#0755C9',
+                            yellow: '#FFC928',
+                            red: '#F53045'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Import Font Google 'Inter' -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel untuk kompilasi JSX terus di pelayar (Browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Custom Scrollbar untuk kekemasan */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        
+        /* Slider Styling */
+        input[type=range] {
+            height: 26px;
+            -webkit-appearance: none;
+            margin: 10px 0;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            animate: 0.2s;
+            background: #e2e8f0; /* Tukar ke warna terang */
+            border-radius: 10px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #3b82f6; /* Blue 500 */
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        input[type=range].slider-rose::-webkit-slider-thumb { background: #f43f5e; box-shadow: 0 0 10px rgba(244, 63, 94, 0.5); }
+        input[type=range].slider-pink::-webkit-slider-thumb { background: #ec4899; box-shadow: 0 0 10px rgba(236, 72, 153, 0.5); }
+        input[type=range].slider-purple::-webkit-slider-thumb { background: #a855f7; box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- 1. LOGIK PENGIRAAN KOMISYEN UTAMA ---
+        const calculateCommission = (movonUnits, cuckooUnits, cuckooHalfUnits, customGroupVal, isCustomGroup) => {
+            const cuckooNetUnits = cuckooUnits + (cuckooHalfUnits * 0.5);
+            const totalNetUnits = movonUnits + cuckooNetUnits;
+            const totalPhysicalUnits = movonUnits + cuckooUnits + cuckooHalfUnits;
+            
+            // LOGIK MOMENTUM DUO (PAIRING)
+            const pairedUnits = Math.min(movonUnits, cuckooNetUnits);
+            const bonusUnitsFromPair = pairedUnits * 0.5; // Setiap pair tambah 0.5 unit
+            const effectiveTotalUnits = totalNetUnits + bonusUnitsFromPair; // Unit Nett yang digunapakai untuk Insentif DUO SAHAJA
+            
+            // Basic Commission
+            const movonComm = movonUnits * 230;
+            const cuckooComm = Math.floor(cuckooNetUnits) * 100;
+            const baseComm = movonComm + cuckooComm;
+            
+            const getBooster = (units) => {
+                if (units >= 15) return 3700;
+                if (units >= 10) return 1800;
+                if (units >= 5) return 1200;
+                return 0;
+            };
+            
+            const getDuo = (units) => {
+                if (units >= 50) return 7500;
+                if (units >= 40) return 5000;
+                if (units >= 30) return 4000;
+                if (units >= 20) return 3000;
+                if (units >= 10) return 1000;
+                return 0;
+            };
+            
+            const boosterBonus = getBooster(totalNetUnits);
+            const duoBonus = getDuo(effectiveTotalUnits);
+            
+            // Simulasi Group Sales
+            let agentA = 0;
+            let agentB = 0;
+            let groupSales = 0;
+
+            if (isCustomGroup) {
+                groupSales = customGroupVal;
+                agentA = Math.ceil(customGroupVal / 2);
+                agentB = Math.floor(customGroupVal / 2);
+            } else {
+                agentA = Math.floor(totalNetUnits * 1.5);
+                agentB = Math.floor(totalNetUnits * 1.2);
+                groupSales = agentA + agentB;
+            }
+            
+            const getSBI = (gUnits) => {
+                if (gUnits >= 50) return 6000;
+                if (gUnits >= 40) return 4500;
+                if (gUnits >= 30) return 3000;
+                if (gUnits >= 20) return 1500;
+                if (gUnits >= 10) return 500;
+                return 0;
+            };
+            
+            const sbiBonus = totalNetUnits >= 5 ? getSBI(groupSales) : 0;
+            const personalTotal = baseComm + boosterBonus + duoBonus;
+            const grandTotal = personalTotal + sbiBonus;
+            
+            return {
+                movonUnits, cuckooUnits, cuckooHalfUnits, cuckooNetUnits, totalNetUnits, totalPhysicalUnits, effectiveTotalUnits, pairedUnits,
+                movonComm, cuckooComm, baseComm,
+                boosterBonus, duoBonus,
+                personalTotal,
+                agentA, agentB, groupSales, sbiBonus,
+                grandTotal
+            };
+        };
+
+        // --- 2. KOMPONEN UI DASHBOARD (Boleh digunapakai semula - Tema Terang) ---
+        const ResultDashboard = ({ simData }) => (
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-start mt-8 md:mt-16">
+                {/* VISUALIZATION AREA */}
+                <div className="bg-white rounded-3xl border border-blue-50 shadow-xl hover:shadow-2xl transition-all duration-500 p-8 md:p-12 flex flex-col items-center justify-center relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-[50px] group-hover:scale-150 transition-transform duration-700"></div>
+                    <div className="absolute bottom-0 left-0 w-40 h-40 bg-purple-500/10 rounded-full blur-[50px] group-hover:scale-150 transition-transform duration-700"></div>
+                    
+                    {/* USER NODE */}
+                    <div className="flex flex-col items-center z-10 mb-10 w-full hover:-translate-y-1 transition-transform duration-300">
+                        <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-[0_10px_20px_rgba(59,130,246,0.3)] mb-5 border-4 md:border-[6px] border-white z-10 group-hover:shadow-[0_15px_30px_rgba(59,130,246,0.5)] transition-shadow">
+                            <svg className="w-12 h-12 md:w-16 md:h-16 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+                        </div>
+                        <div className="text-center bg-white shadow-lg px-6 md:px-8 py-4 md:py-5 rounded-2xl border border-slate-100 w-full max-w-[320px] md:max-w-[360px] -mt-10 pt-10 md:pt-12">
+                            <span className="text-mst-dark font-black block text-xl md:text-2xl tracking-widest mb-2">ANDA</span>
+                            <div className="flex justify-between items-center text-base md:text-lg border-b border-slate-100 pb-2 mb-2">
+                                <span className="text-slate-500">Fizikal:</span>
+                                <span className="text-mst-blue font-bold">{simData.totalPhysicalUnits} Unit</span>
+                            </div>
+                            <div className="flex justify-between items-center text-base md:text-lg">
+                                <span className="text-slate-500">Nett:</span>
+                                <span className="text-emerald-600 font-black">{simData.totalNetUnits} Unit</span>
+                            </div>
+                            
+                            {simData.pairedUnits > 0 && (
+                                <div className="mt-4 text-xs md:text-sm font-bold text-orange-600 bg-orange-50 px-3 py-2 rounded-lg border border-orange-200">
+                                    🔥 Duo Actif: Dikira {simData.effectiveTotalUnits} Nett!
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* TREE LINES */}
+                    <div className="w-full max-w-[240px] md:max-w-[320px] h-10 md:h-12 border-t-[3px] border-l-[3px] border-r-[3px] border-slate-200 rounded-t-2xl relative -mt-6 md:-mt-8 mb-6 md:mb-8 z-0">
+                        <div className="absolute left-1/2 top-0 w-[3px] h-8 md:h-10 bg-slate-200 -translate-x-1/2 -mt-8 md:-mt-10"></div>
+                    </div>
+
+                    {/* AGENT NODES */}
+                    <div className="flex w-full justify-between max-w-[360px] md:max-w-[460px] z-10">
+                        <div className="flex flex-col items-center w-[160px] md:w-[190px]">
+                            <div className="w-16 h-16 md:w-20 md:h-20 bg-slate-100 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-md z-10">
+                                <svg className="w-8 h-8 md:w-10 md:h-10 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+                            </div>
+                            <div className="text-center bg-white shadow-md px-4 py-3 md:py-4 rounded-xl border border-slate-100 w-full -mt-8 pt-7 md:pt-8">
+                                <span className="text-slate-700 font-bold block text-sm md:text-base mb-1 md:mb-2">Ejen A</span>
+                                <span className="text-slate-600 text-sm md:text-base font-bold bg-slate-50 px-2 py-1 rounded block border border-slate-100">{simData.agentA} Unit</span>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center w-[160px] md:w-[190px]">
+                            <div className="w-16 h-16 md:w-20 md:h-20 bg-slate-100 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-md z-10">
+                                <svg className="w-8 h-8 md:w-10 md:h-10 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+                            </div>
+                            <div className="text-center bg-white shadow-md px-4 py-3 md:py-4 rounded-xl border border-slate-100 w-full -mt-8 pt-7 md:pt-8">
+                                <span className="text-slate-700 font-bold block text-sm md:text-base mb-1 md:mb-2">Ejen B</span>
+                                <span className="text-slate-600 text-sm md:text-base font-bold bg-slate-50 px-2 py-1 rounded block border border-slate-100">{simData.agentB} Unit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* BREAKDOWN AREA */}
+                <div className="flex flex-col gap-6 md:gap-8">
+                    
+                    {/* Personal Income */}
+                    <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl relative overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                        <div className="absolute left-0 top-0 w-1.5 h-full bg-cyan-500"></div>
+                        <h4 className="text-cyan-600 font-black mb-5 uppercase tracking-wider text-sm md:text-lg flex items-center gap-2">
+                            <span>1. Komisen Peribadi (Personal)</span>
+                        </h4>
+                        <div className="space-y-4 mb-6 text-base md:text-lg font-medium">
+                            {simData.movonUnits > 0 && (
+                                <div className="flex justify-between text-slate-600">
+                                    <span>MOVON ({simData.movonUnits} x RM230)</span>
+                                    <span className="text-slate-900 font-black">RM {simData.movonComm.toLocaleString()}</span>
+                                </div>
+                            )}
+                            {Math.floor(simData.cuckooNetUnits) > 0 && (
+                                <div className="flex justify-between text-slate-600">
+                                    <span>CUCKOO (Genap {Math.floor(simData.cuckooNetUnits)} x RM100)</span>
+                                    <span className="text-slate-900 font-black">RM {simData.cuckooComm.toLocaleString()}</span>
+                                </div>
+                            )}
+                            {simData.cuckooNetUnits % 1 !== 0 && (
+                                <div className="flex justify-between text-slate-400 text-sm italic">
+                                    <span>* Baki {simData.cuckooNetUnits % 1} Unit CUCKOO (KIV)</span>
+                                    <span>RM 0</span>
+                                </div>
+                            )}
+                            
+                            {simData.boosterBonus > 0 && (
+                                <div className="flex justify-between text-emerald-600 border-t border-slate-100 pt-4 mt-2">
+                                    <span>Momentum Booster ({simData.totalNetUnits} Unit)</span>
+                                    <span className="font-black">+ RM {simData.boosterBonus.toLocaleString()}</span>
+                                </div>
+                            )}
+                            
+                            {simData.duoBonus > 0 && (
+                                <div className="flex justify-between text-purple-600">
+                                    <span>Momentum Duo ({simData.effectiveTotalUnits} Unit)</span>
+                                    <span className="font-black">+ RM {simData.duoBonus.toLocaleString()}</span>
+                                </div>
+                            )}
+                        </div>
+                        <div className="flex justify-between items-end pt-5 border-t border-slate-200 bg-slate-50 -mx-6 -mb-6 md:-mx-8 md:-mb-8 px-6 py-5 md:px-8 md:py-6 mt-4">
+                            <span className="text-slate-500 text-sm md:text-base font-bold uppercase">Total Personal</span>
+                            <span className="text-3xl md:text-4xl font-black text-mst-dark">RM {simData.personalTotal.toLocaleString()}</span>
+                        </div>
+                    </div>
+                    
+                    {/* Group Income */}
+                    <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xl relative overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                        <div className="absolute left-0 top-0 w-1.5 h-full bg-purple-500"></div>
+                        <h4 className="text-purple-600 font-black mb-5 uppercase tracking-wider text-sm md:text-lg">
+                            2. Komisen Kumpulan (Passive)
+                        </h4>
+                        <div className="space-y-4 mb-6 text-base md:text-lg font-medium">
+                            <div className="flex justify-between items-center text-slate-600">
+                                <span>Total Group Sales (A + B)</span>
+                                <span className="text-slate-800 bg-slate-100 px-3 py-1 rounded-lg text-sm md:text-base font-bold border border-slate-200">{simData.groupSales} Unit</span>
+                            </div>
+                            <div className="flex justify-between items-center text-slate-600">
+                                <span>Star Builder (SBI)</span>
+                                <span className={simData.sbiBonus > 0 ? "text-emerald-600 font-black" : "text-slate-400"}>+ RM {simData.sbiBonus.toLocaleString()}</span>
+                            </div>
+                            {simData.totalNetUnits < 5 && simData.groupSales >= 10 && (
+                                <div className="text-xs md:text-sm text-rose-600 text-right mt-2 font-bold bg-rose-50 p-3 rounded-lg border border-rose-100">
+                                    * Gagal Claim: Personal Sales mesti ≥ 5 Unit Nett
+                                </div>
+                            )}
+                        </div>
+                        <div className="flex justify-between items-end pt-5 border-t border-slate-200 bg-slate-50 -mx-6 -mb-6 md:-mx-8 md:-mb-8 px-6 py-5 md:px-8 md:py-6 mt-4">
+                            <span className="text-slate-500 text-sm md:text-base font-bold uppercase">Total Group</span>
+                            <span className="text-3xl md:text-4xl font-black text-mst-dark">RM {simData.sbiBonus.toLocaleString()}</span>
+                        </div>
+                    </div>
+
+                    {/* GRAND TOTAL */}
+                    <div className="bg-gradient-to-r from-mst-blue to-[#0a6cf0] rounded-3xl p-8 md:p-10 shadow-[0_15px_40px_rgba(7,85,201,0.4)] border-2 border-blue-400 flex flex-col sm:flex-row justify-between items-center gap-6 transform transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_rgba(7,85,201,0.6)] cursor-default">
+                        <div className="text-center sm:text-left">
+                            <span className="text-blue-100 font-black block text-sm md:text-xl mb-2 uppercase tracking-widest">GRAND TOTAL INCOME</span>
+                            <span className="text-blue-200 text-xs md:text-sm font-bold uppercase opacity-90">Personal + Group Bonus</span>
+                        </div>
+                        <span className="text-5xl md:text-6xl font-black text-white drop-shadow-lg">
+                            RM {simData.grandTotal.toLocaleString()}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // --- 3. KOMPONEN UTAMA (APP) ---
+        const CommissionApp = () => {
+            // State untuk Simulasi Pantas (Preset)
+            const [presetMode, setPresetMode] = useState('MOVON'); 
+            const [presetUnits, setPresetUnits] = useState(10); 
+            
+            // State untuk Kalkulator Bebas (Custom)
+            const [customMovon, setCustomMovon] = useState(5);
+            const [customCuckoo, setCustomCuckoo] = useState(5);
+            const [customCuckooHalf, setCustomCuckooHalf] = useState(0);
+            const [customGroup, setCustomGroup] = useState(20);
+            
+            // Data untuk kedua-dua bahagian
+            let pMovon = 0, pCuckoo = 0;
+            if (presetMode === 'MOVON') { pMovon = presetUnits; }
+            else if (presetMode === 'CUCKOO') { pCuckoo = presetUnits; }
+            else if (presetMode === 'MIXED') { pMovon = presetUnits; pCuckoo = presetUnits; }
+            
+            const presetData = calculateCommission(pMovon, pCuckoo, 0, 0, false);
+            const customData = calculateCommission(customMovon, customCuckoo, customCuckooHalf, customGroup, true);
+
+            const HeaderTitle = ({ title, subtitle, isDark=false }) => (
+                <div className="text-center w-full max-w-3xl mx-auto mb-10 md:mb-16">
+                    <h2 className={`text-3xl md:text-5xl font-black mb-4 tracking-tight uppercase ${isDark ? 'text-white' : 'text-mst-dark'}`}>
+                        {title}
+                    </h2>
+                    <p className={`text-base md:text-xl font-medium ${isDark ? 'text-slate-300' : 'text-mst-blue'}`}>
+                        {subtitle}
+                    </p>
+                    <div className="h-1.5 w-20 md:w-32 bg-mst-yellow rounded-full mt-6 mx-auto"></div>
+                </div>
+            );
+
+            const InfoCard = ({ title, bgHeader, items }) => (
+                <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group cursor-default">
+                    <div className={`${bgHeader} p-4 md:p-5 text-white flex items-center justify-between group-hover:brightness-110 transition-all`}>
+                        <h3 className="text-lg md:text-xl font-black tracking-wide">{title}</h3>
+                    </div>
+                    <div className="p-5 md:p-6 flex flex-col gap-4 text-left flex-1">
+                        {items.map((item, idx) => (
+                            <div key={idx} className={`flex justify-between items-center ${idx !== items.length - 1 ? 'border-b border-slate-100 pb-4' : ''}`}>
+                                <div className="flex flex-col pr-4">
+                                    <span className="text-sm md:text-base font-bold text-slate-700">{item.label}</span>
+                                    {item.desc && <span className="text-xs text-slate-500 mt-1 leading-relaxed">{item.desc}</span>}
+                                </div>
+                                <div className="text-right shrink-0">
+                                    <span className={`text-lg md:text-2xl font-black ${item.valColor || 'text-mst-blue'}`}>{item.value}</span>
+                                    {item.subValue && <span className="block text-[10px] md:text-xs font-bold text-slate-400 mt-1">{item.subValue}</span>}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="w-full relative pb-0 bg-slate-50">
+                    {/* SEKSYEN 1: JADUAL KOMISYEN TETAP */}
+                    <div className="pt-12 md:pt-20 px-4 md:px-8 max-w-7xl mx-auto pb-12">
+                        <HeaderTitle title="Struktur Komisyen" subtitle="Pelan ganjaran lumayan untuk usaha anda" />
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
+                            <InfoCard 
+                                title="RENTAL (SEWAAN)" 
+                                bgHeader="bg-mst-blue"
+                                items={[
+                                    { label: "MOVON Space/Baby/Choice", value: "RM 230" },
+                                    { label: "MOVON Choice : CUCKOO", value: "RM 100", subValue: "1 Unit Nett" },
+                                    { label: "CUCKOO (Item 0.5 Unit)", desc: "* King Top 2, CUCKOO x SAMSUNG", value: "RM 0", subValue: "Kumpul genap 1 Nett = RM100", valColor: "text-slate-400" }
+                                ]}
+                            />
+                            <InfoCard 
+                                title="OUTRIGHT (BELI TERUS)" 
+                                bgHeader="bg-[#04429E]"
+                                items={[
+                                    { label: "MOVON Space & Baby", value: "RM 280" },
+                                    { label: "MOVON Choice : CUCKOO", value: "RM 100" },
+                                    { label: "MOVON Vacuum (1-9 Units)", value: "RM 300" },
+                                    { label: "MOVON Vacuum (10-19 Units)", value: "RM 320" },
+                                    { label: "MOVON Vacuum (20+ Units)", value: "RM 350" }
+                                ]}
+                            />
+                            <div className="flex flex-col gap-6">
+                                <InfoCard 
+                                    title="STAR BUILDER INCENTIVE" 
+                                    bgHeader="bg-mst-yellow text-mst-dark"
+                                    items={[
+                                        { label: "Group Sales ≥ 10 Units", value: "RM 500", valColor: "text-orange-500" },
+                                        { label: "Group Sales ≥ 20 Units", value: "RM 1,500", valColor: "text-orange-500" },
+                                        { label: "Group Sales ≥ 30 Units", value: "RM 3,000", valColor: "text-orange-500" },
+                                        { label: "Group Sales ≥ 50 Units", value: "RM 6,000", valColor: "text-orange-500" }
+                                    ]}
+                                />
+                            </div>
+                        </div>
+
+                        {/* INSENTIF BOOSTER & DUO */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10">
+                            <InfoCard 
+                                title="🚀 MOMENTUM BOOSTER" 
+                                bgHeader="bg-gradient-to-r from-emerald-500 to-teal-600"
+                                items={[
+                                    { label: "Personal Target ≥ 5 Units", value: "RM 1,200", valColor: "text-emerald-600" },
+                                    { label: "Personal Target ≥ 10 Units", value: "RM 1,800", valColor: "text-emerald-600" },
+                                    { label: "Personal Target ≥ 15+ Units", value: "RM 3,700", valColor: "text-emerald-600" }
+                                ]}
+                            />
+                            <InfoCard 
+                                title="🔥 MOMENTUM DUO" 
+                                bgHeader="bg-gradient-to-r from-purple-600 to-pink-600"
+                                items={[
+                                    { label: "Kiraan Duo ≥ 10 Units", value: "RM 1,000", valColor: "text-purple-600" },
+                                    { label: "Kiraan Duo ≥ 20 Units", value: "RM 3,000", valColor: "text-purple-600" },
+                                    { label: "Kiraan Duo ≥ 40 Units", value: "RM 5,000", valColor: "text-purple-600" },
+                                    { label: "Kiraan Duo ≥ 50+ Units", value: "RM 7,500", valColor: "text-purple-600" }
+                                ]}
+                            />
+                        </div>
+                    </div>
+
+                    {/* SEKSYEN 2: SIMULASI PANTAS (PRESET) - Tema Terang */}
+                    <div className="bg-gradient-to-b from-[#e0f2fe] to-white w-full rounded-t-[2.5rem] md:rounded-t-[4rem] px-4 md:px-8 py-16 md:py-24 shadow-[0_-15px_40px_rgba(0,0,0,0.05)] border-t border-blue-100 relative z-20">
+                        <div className="max-w-6xl mx-auto">
+                            <HeaderTitle title="Simulasi Pantas" subtitle="Contoh unjuran pendapatan mengikut senario biasa" isDark={false} />
+
+                            {/* TABS MODE PRESET */}
+                            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12 bg-slate-50 p-2 rounded-3xl md:rounded-full w-fit mx-auto border border-slate-200">
+                                <button onClick={() => setPresetMode('MOVON')} className={`px-5 py-2.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 ${presetMode === 'MOVON' ? 'bg-mst-blue text-white shadow-lg shadow-blue-500/30 scale-105' : 'text-slate-500 hover:text-mst-dark hover:bg-slate-200'}`}>
+                                    MOVON SAHAJA
+                                </button>
+                                <button onClick={() => setPresetMode('CUCKOO')} className={`px-5 py-2.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 ${presetMode === 'CUCKOO' ? 'bg-mst-red text-white shadow-lg shadow-red-500/30 scale-105' : 'text-slate-500 hover:text-mst-dark hover:bg-slate-200'}`}>
+                                    CUCKOO SAHAJA
+                                </button>
+                                <button onClick={() => setPresetMode('MIXED')} className={`px-5 py-2.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 ${presetMode === 'MIXED' ? 'bg-gradient-to-r from-mst-blue to-mst-red text-white shadow-lg shadow-purple-500/30 scale-105' : 'text-slate-500 hover:text-mst-dark hover:bg-slate-200'}`}>
+                                    MOVON + CUCKOO
+                                </button>
+                            </div>
+
+                            {/* UNIT BUTTONS PRESET */}
+                            <div className="flex justify-center min-h-[60px] items-center">
+                                {presetMode === 'MIXED' ? (
+                                    <div className="flex flex-wrap justify-center gap-3">
+                                        {[5, 6, 10, 15, 20].map((u) => (
+                                            <button key={u} onClick={() => setPresetUnits(u)} className={`px-5 md:px-6 py-3 rounded-xl md:rounded-full font-black text-sm md:text-base transition-all ${presetUnits === u ? 'bg-gradient-to-r from-mst-blue to-mst-red text-white scale-110 shadow-[0_5px_15px_rgba(7,85,201,0.3)] border-none' : 'bg-white text-slate-600 border border-slate-200 shadow-sm hover:bg-slate-50'}`}>
+                                                {u === 6 ? '🌟 6+6 (Duo Max)' : `${u}+${u} Unit`}
+                                            </button>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-wrap justify-center gap-3">
+                                        {[5, 10, 15, 20].map((u) => (
+                                            <button key={u} onClick={() => setPresetUnits(u)} className={`px-6 py-3 rounded-xl md:rounded-full font-black text-sm md:text-base transition-all ${presetUnits === u ? 'bg-mst-dark text-white scale-110 shadow-[0_5px_15px_rgba(16,38,83,0.3)]' : 'bg-white text-slate-600 border border-slate-200 shadow-sm hover:bg-slate-50'}`}>
+                                                {u} Unit
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            <ResultDashboard simData={presetData} />
+                        </div>
+                    </div>
+
+                    {/* SEKSYEN 3: KALKULATOR BEBAS (CUSTOM) - Tema Terang */}
+                    <div className="bg-slate-50 w-full px-4 md:px-8 py-16 md:py-24 border-t-2 border-dashed border-slate-300 relative z-10">
+                        <div className="max-w-6xl mx-auto">
+                            
+                            <div className="text-center w-full max-w-3xl mx-auto mb-10 md:mb-16">
+                                <h2 className="text-3xl md:text-5xl font-black text-mst-dark mb-4 tracking-tight uppercase drop-shadow-sm">
+                                    Kalkulator Komisyen
+                                </h2>
+                                <p className="text-base md:text-xl font-medium text-mst-blue">
+                                    Uji potensi pendapatan anda sendiri. Gerakkan slider di bawah.
+                                </p>
+                                <div className="h-1.5 w-20 md:w-32 bg-mst-yellow rounded-full mt-6 mx-auto animate-pulse"></div>
+                            </div>
+
+                            {/* CUSTOM SLIDERS */}
+                            <div className="w-full max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col gap-6 md:gap-8 mb-4 relative overflow-hidden group">
+                                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-rose-400 to-purple-400"></div>
+                                
+                                <div className="flex items-center gap-4">
+                                    <div className="w-28 md:w-32 text-left flex flex-col">
+                                        <span className="font-black text-blue-600 text-sm md:text-base tracking-wide">MOVON</span>
+                                        <span className="text-[10px] md:text-xs text-slate-500 font-medium">Rental / Outright</span>
+                                    </div>
+                                    <input type="range" min="0" max="50" value={customMovon} onChange={(e) => setCustomMovon(parseInt(e.target.value))} />
+                                    <span className="w-10 text-right font-black text-slate-800 text-xl md:text-2xl">{customMovon}</span>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-28 md:w-32 text-left flex flex-col">
+                                        <span className="font-black text-rose-500 text-sm md:text-base tracking-wide leading-tight">CUCKOO (1.0)</span>
+                                        <span className="text-[10px] md:text-xs text-slate-500 font-medium">Standard Plan</span>
+                                    </div>
+                                    <input type="range" min="0" max="50" value={customCuckoo} onChange={(e) => setCustomCuckoo(parseInt(e.target.value))} className="slider-rose" />
+                                    <span className="w-10 text-right font-black text-slate-800 text-xl md:text-2xl">{customCuckoo}</span>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-28 md:w-32 text-left flex flex-col">
+                                        <span className="font-black text-pink-500 text-sm md:text-base tracking-wide leading-tight">CUCKOO (0.5)</span>
+                                        <span className="text-[10px] md:text-xs text-slate-500 font-medium">GOOOD Plan / TV</span>
+                                    </div>
+                                    <input type="range" min="0" max="50" value={customCuckooHalf} onChange={(e) => setCustomCuckooHalf(parseInt(e.target.value))} className="slider-pink" />
+                                    <span className="w-10 text-right font-black text-slate-800 text-xl md:text-2xl">{customCuckooHalf}</span>
+                                </div>
+                                <div className="flex items-center gap-4 pt-5 border-t border-slate-100">
+                                    <div className="w-28 md:w-32 text-left flex flex-col">
+                                        <span className="font-black text-purple-600 text-sm md:text-base tracking-wide">TEAM SALES</span>
+                                        <span className="text-[10px] md:text-xs text-slate-500 font-medium">Total Group (SBI)</span>
+                                    </div>
+                                    <input type="range" min="0" max="100" step="5" value={customGroup} onChange={(e) => setCustomGroup(parseInt(e.target.value))} className="slider-purple" />
+                                    <span className="w-10 text-right font-black text-slate-800 text-xl md:text-2xl">{customGroup}</span>
+                                </div>
+                            </div>
+
+                            <ResultDashboard simData={customData} />
+                        </div>
+                    </div>
+                    
+                    {/* FOOTER & CREDITS DEVELOPER */}
+                    <footer className="bg-mst-dark text-slate-300 py-8 md:py-12 border-t-[6px] border-mst-blue relative z-20">
+                        <div className="max-w-4xl mx-auto px-4 text-center flex flex-col items-center">
+                            <p className="text-xs md:text-sm font-medium mb-4">
+                                Hak Cipta Terpelihara &copy; {new Date().getFullYear()} Kalkulator Komisyen MST
+                            </p>
+                            
+                            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-sm md:text-base bg-slate-800/50 px-5 md:px-8 py-3 md:py-4 rounded-full border border-slate-700 hover:border-slate-500 transition-colors shadow-inner">
+                                <span>Direka & Dibangunkan oleh</span>
+                                <a 
+                                    href="https://wa.me/601171213375?text=Hai%20Ihsanuddin%2C%20saya%20berminat%20untuk%20menempah%20servis%20bina%20website%20pro." 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="font-black text-white hover:text-mst-yellow transition-all duration-300 flex items-center gap-2 group underline decoration-slate-600 decoration-2 underline-offset-4 hover:decoration-mst-yellow"
+                                >
+                                    Ihsanuddinadli
+                                    {/* WhatsApp Icon */}
+                                    <svg className="w-5 h-5 md:w-6 md:h-6 text-emerald-400 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <span className="text-[10px] md:text-xs text-slate-400 mt-3 md:mt-4 italic animate-[pulse_2s_ease-in-out_infinite] bg-slate-900 px-3 py-1 rounded-full">
+                                💡 Klik pada nama di atas jika berminat menempah sistem seperti ini!
+                            </span>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<CommissionApp />);
+    </script>
+</body>
+</html>
